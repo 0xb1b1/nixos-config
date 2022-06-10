@@ -9,6 +9,7 @@
     unzip
     wget
     curl
+    scrot
     bpytop
 
     ### Programming languages ###
@@ -27,7 +28,12 @@
     
     ### Development ###
     vscodium-fhs
-    
+
+    ### OSINT ###
+    nmap  # Network enumeration tool
+    dnsrecon  # DNS enumeration tool
+
+
     ### Social ###
     element-desktop
     tdesktop
@@ -88,3 +94,4 @@
     };
   };
 }
+

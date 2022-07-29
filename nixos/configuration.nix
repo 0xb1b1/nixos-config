@@ -28,15 +28,18 @@
   networking.hostName = "nixos"; # TODO: Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
+  # Configure network proxy if necessary.
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # Configure networking.
+  networking.networkmanager = {
+    enable = true;
+    insertNameservers = [ "1.1.1.1" "1.0.0.1" ];
+  };
 
   # Set your time zone.
-  time.timeZone = "Europe/Berlin";  # TODO: Use your TZ
+  time.timeZone = "Europe/Berlin";  # TODO: Define your TZ
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
@@ -47,7 +50,42 @@
   ### SECURITY ###
 
   # Enable Docker.
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
+
+  # Enable Podman.
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork = {
+      dnsname.enable = true;
+    };
+  };
+
+  # Enable libvirt (KVM).
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
+  ## Enable SELinux. (https://nixos.wiki/wiki/Workgroup:SELinux)
+  #boot.kernelPatches = [ {
+  #  name = "selinux-config";
+  #  patch = null;
+  #  extraConfig = 
+  #    SECURITY_SELINUX y
+  #    SECURITY_SELINUX_BOOTPARAM n
+  #    SECURITY_SELINUX_DISABLE n
+  #    SECURITY_SELINUX_DEVELOP y
+  #    SECURITY_SELINUX_AVC_STATS y
+  #    SECURITY_SELINUX_CHECKREQPROT_VALUE 0
+  #    DEFAULT_SECURITY_SELINUX n
+  #  ;
+  #} ];
+  #systemd.package = pkgs.systemd.override { withSelinux = true; };
+  #boot.kernelParams = [ "security=selinux" ];
+  #environment.systemPackages = with pkgs; [ policycoreutils ];
+
+  # User settings.
+  users.mutableUsers = true;
+  boot.kernelParams = [ "nohibernate" ];
 
   # Configure keymap in X11.
   services.xserver = {
@@ -82,7 +120,7 @@
     };
   };
 
-  # Enable PipeWire
+  # Enable PipeWire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -94,42 +132,143 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.changeme = {  # CHANGEME: Use your username
-    isNormalUser = true;
-    description = "changeme";  # CHANGEME: Enter a description or just your username
-    extraGroups = [ "networkmanager" "wheel" ];  # Group `docker` is not utilized since it's insecure
+  users.users = {
+    voxel = {  # TODO: Set your username
+      isNormalUser = true;
+      description = "voxel";  # TODO: Enter a description or just your username
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      shell = pkgs.zsh;
+    };
+  };
+
+  # Configure sudo.
+  security.sudo.enable = false;
+  #security.sudo.extraRules = [
+  #  {
+  #    users = [ "voxel" ];
+  #    commands = [
+  #      {
+  #       command = "ALL";
+  #       options = [ "NOPASSWD" ];
+  #      }
+  #    ];
+  #  }
+  #];
+
+  # Configure doas.
+  security.doas = {
+    enable = true;
+    extraRules = [
+      {
+        users = [ "voxel" ];
+	noPass = true;
+	keepEnv = true;
+      }
+    ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    gcc
     neovim
     wget
     zsh
     lsof
+    virt-manager
+    podman-compose
+    dnsname-cni
+    minikube
+    shadowsocks-rust
+    openvpn
   ];
+
+  # Add udev rules.
+  services.udev.packages = [
+    pkgs.trezor-udev-rules
+  ];
+
+  # Enable gcr on dbus for gnome pinentry.
+  services.dbus.packages = [ pkgs.gcr ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  programs.mtr.enable = true;
+  services.pcscd.enable = true;
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # TODO: Disable if unused
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
     passwordAuthentication = false;
   };
 
+  # Set up Nginx as a reverse proxy.
+  services.nginx = {
+    enable = true;
+    # Use recommended settings.
+    recommendedTlsSettings = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
+
+    # Only allow PFS-enabled ciphers with AES256
+    sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL";
+    
+    commonHttpConfig = ''
+      # Add HSTS header with preloading to HTTPS requests.
+      # Adding this header to HTTP requests is discouraged
+      map $scheme $hsts_header {
+          https   "max-age=31536000; includeSubdomains; preload";
+      }
+      add_header Strict-Transport-Security $hsts_header;
+
+      # Enable CSP for your services.
+      #add_header Content-Security-Policy "script-src 'self'; object-src 'none'; base-uri 'none';" always;
+
+      # Minimize information leaked to other domains
+      add_header 'Referrer-Policy' 'origin-when-cross-origin';
+
+      # Disable embedding as a frame
+      add_header X-Frame-Options DENY;
+
+      # Prevent injection of code in other mime types (XSS Attacks)
+      add_header X-Content-Type-Options nosniff;
+
+      # Enable XSS protection of the browser.
+      # May be unnecessary when CSP is configured properly (see above)
+      add_header X-XSS-Protection "1; mode=block";
+
+      # This might create errors
+      proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
+    '';
+
+    virtualHosts = {
+      "foo.bar.fqdn" = {
+        listen = [
+	  {
+	    addr = "0.0.0.0";
+	    port = 443;
+	    ssl = true;
+	  }
+	  {
+	    addr = "0.0.0.0";
+	    port = 80;
+	  }
+	];
+        forceSSL = true;
+	sslCertificate = "/var/nginx/certs/foo/fullchain.pem";
+	sslCertificateKey = "/var/nginx/certs/foo/privkey.pem";
+        locations."/".proxyPass = "http://127.0.0.1:1234";
+      };
+    };
+  };
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22000 ];  # Syncthing, 
-  networking.firewall.allowedUDPPorts = [ 22000 21027 ];  # Syncthing, Syncthing, 
+  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 ];  # Syncthing, Docker PiHole, NGINX, NGINX, Dev, Dev, 
+  networking.firewall.allowedUDPPorts = [ 22000 21027 53 ];  # Syncthing, Syncthing, Docker PiHole, 
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -141,8 +280,23 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-  # Set extra options
-  nix.extraOptions = ''
-    substitute = true  # Substitution = using cache instead of building packages
+  # Install flakes
+  nix = {
+    # Enable Flakes.
+    package = pkgs.nixFlakes;
+    # Set extra options (substituting is equal to using cache instead of building packages).
+    extraOptions = ''
+    substitute = true
+    experimental-features = nix-command flakes
+    '';
+  };
+
+  # Add extra lines in /etc/hosts.
+  networking.extraHosts = ''
+    127.0.0.1 host0.local
+    127.0.0.1 host1.local
+    127.0.0.1 host2.local
+    127.0.0.1 host3.local
+    127.0.0.1 host4.local
   '';
 }

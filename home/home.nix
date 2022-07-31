@@ -1,148 +1,224 @@
-{ pkgs, ...}: {
-  # Install packages
-  home.packages = with pkgs; [
+{ pkgs, ...}:
+
+let
+  toolPkgs = with pkgs; [
     ### Tools ###
-    home-manager
-    kitty
-    cool-retro-term
-    dmenu
-    ranger
-    xfce.thunar
-    xfce.tumbler
-    gthumb
-    sshfs
-    unzip
-    wget
-    curl
-    fakeroot
-    rsync
-    bat
-    scrot
-    #gnupg
-    feh
-    #networkmanagerapplet
-    gotop
-    #bpytop
-    pinentry-curses
-    appimage-run
-
-    ### Development ###
-    gnumake
-    cmake
-    rustup
-    maturin
-    gcc
-    python27
-    python310
-    go
-    nodejs
-    nodePackages.npm
-    nodePackages.vue-cli
-    kubectl
-
-    ### Linters ###
-    rust-analyzer
-    #vimPlugins.coc-rust-analyzer
-
-    ### Pwning ###
-    inetutils
-    samba
-    redis
-    gobuster
-    mariadb
-    postgresql
-
-    ### Sound ###
-    pavucontrol
-    #xfce.xfce4-pulseaudio-plugin
-
-    ### Security ###
-
-
-    ### Encryption ###
-    cryptomator
-
-    ### Syncronization ###
-    #syncthing # Enabled as a service
-    
-    ### Development ###
-    vscodium-fhs
-    emacs
-
-    ### OSINT ###
-    nmap  # Network enumeration tool
-    dnsrecon  # DNS enumeration tool
-
-    ### Customization ###
-    cascadia-code
-
-    ### Identity ###
-    keybase
-
-    ### Social ###
-    element-desktop
-    threema-desktop
-    #tdesktop
-    telegram-cli
-    kotatogram-desktop
-    thunderbird
-    
-    ### Browsers ###
-    librewolf
-    tor-browser-bundle-bin
-    lynx
-
-    ### Documents ###
-    libreoffice-fresh
-
-    ### Media editing ###
-    darktable
-    libsForQt5.kdenlive
-    handbrake
-
-    ### Security ###
-    keepassxc
-    i3lock
-
-    ### Filesharing ###
-    ipfs
-    transmission-gtk
-
-    ### Downloads ###
-    youtube-dl
-    hakuneko
-
-    ### Media, streaming ###
-    mpv
-    ani-cli
-    vlc
-
-    ### Recording ###
-    obs-studio
-    asciinema
-
-    ### Cryptocurrency ###
-    trezord
-    # trezor-suite - unfree license!
-
-    ### Games ###
-    minetest
-    polymc  # Downloads non-free Minecraft (compiled) JAR-file!
-
-    ### Showing off ###
-    neofetch
-    uwufetch
+    home-manager            # Reconfigure a user environment
+    alacritty               # Fast, cross-platform, OpenGL terminal emulator written in Rust
+    cool-retro-term         # Cool Retro Terminal emulator
+    dmenu                   # Dynamic GUI menu
+    tree                    # List contents of directories in a tree-like format
+    ranger                  # Visual file manager written in Python
+    xfce.thunar             # File Manager for the Xfce Desktop Environment
+    xfce.tumbler            # Thumbnail generator for the Xfce Desktop Environment
+    gthumb                  # Image viewer and browser for GNOME
+    sshfs                   # Filesystem client based on SSH
+    zip                     # Package and compress (archive) files
+    unzip                   # List, test and extract compressed files in a ZIP archive
+    wget                    # Non-interactive network downloader
+    curl                    # Transfer a URL
+    fakeroot                # Faking root privileges for file manipulation
+    rsync                   # File-copying tool
+    bat                     # `cat` clone with syntax highlighting and Git integration
+    scrot                   # CLI screen capture utility
+    feh                     # Image viewer and cataloguer
+    ffmpeg                  # Video converter
+    htop                    # TUI system resource visualizer
+    gotop                   # TUI system resource visualizer
+    appimage-run            # AppImage executor
+    glow                    # Markdown CLI renderer
   ];
-  
+
+  devPkgs = with pkgs; [
+    ### Development ###
+    gnumake                 # Development environment automatization
+    cmake                   # Family of tools designed to build, test and package software
+    rustup                  # The Rust toolchain installer
+    maturin                 # 
+    gcc                     # 
+    python27                # 
+    python310               # 
+    go                      # 
+    nodejs                  # 
+    nodePackages.npm        # 
+    nodePackages.vue-cli    # 
+    kubectl                 # 
+    vscodium-fhs            # 
+    emacs                   # 
+  ];
+
+  lintPkgs = with pkgs; [
+    ### Linters ###
+    rust-analyzer           # 
+    #vimPlugins.coc-rust-analyzer
+  ];
+
+  pwnPkgs = with pkgs; [
+    ### Pwning ###
+    inetutils               # 
+    samba                   # 
+    redis                   # 
+    gobuster                # 
+    mariadb                 # 
+    postgresql              # 
+  ];
+
+  revEngineeringPkgs = with pkgs; [
+    ### Reverse-engineering ###
+    hexyl                 # Hex file viewer
+  ];
+
+  soundPkgs = with pkgs; [
+    ### Sound ###
+    pavucontrol             # 
+    #xfce.xfce4-pulseaudio-plugin
+  ];
+
+  secPkgs = with pkgs; [
+    ### Security ###
+    keepassxc               # 
+    i3lock                  # 
+  ];
+
+  encPkgs = with pkgs; [
+    ### Encryption ###
+    cryptomator             # 
+  ];
+
+  syncPkgs = with pkgs; [
+    ### Syncronization ###
+    #syncthing              # Enabled as a service
+  ];
+
+  osintPkgs = with pkgs; [
+    ### OSINT ###
+    nmap                    # Network enumeration tool
+    dnsrecon                # DNS enumeration tool
+  ];
+
+  fontPkgs = with pkgs; [
+    ### Fonts ###
+    cascadia-code           # 
+  ];
+
+  identPkgs = with pkgs; [
+    ### Identity ###
+    keybase                 # 
+  ];
+
+  socialPkgs = with pkgs; [
+    ### Social ###
+    element-desktop         # 
+    threema-desktop         # 
+    #tdesktop               # 
+    telegram-cli            # 
+    kotatogram-desktop      # 
+    thunderbird             # 
+  ];
+
+  browserPkgs = with pkgs; [
+    ### Browsers ###
+    firefox                 # 
+    #librewolf              # 
+    #chromium               # 
+    tor-browser-bundle-bin  # 
+    lynx                    # 
+  ];
+
+  docPkgs = with pkgs; [
+    ### Documents ###
+    libreoffice-fresh       # 
+  ];
+
+  mediaEditPkgs = with pkgs; [
+    ### Media editing ###
+    darktable               # 
+    libsForQt5.kdenlive     # 
+    handbrake               # 
+  ];
+
+  fileSharingPkgs = with pkgs; [
+    ### Filesharing ###
+    ipfs                    # 
+    transmission-gtk        # 
+  ];
+
+  dlPkgs = with pkgs; [
+    ### Downloads ###
+    youtube-dl              # 
+    hakuneko                # 
+  ];
+
+  mediaViewPkgs = with pkgs; [
+    ### Media, streaming ###
+    mpv                     # 
+    ani-cli                 # 
+    vlc                     # 
+  ];
+
+  recPkgs = with pkgs; [
+    ### Recording ###
+    asciinema               # 
+  ];
+
+  cCurrPkgs = with pkgs; [
+    ### Cryptocurrency ###
+    trezord                 # 
+    # trezor-suite - unfree license!
+  ];
+
+  gamePkgs = with pkgs; [
+    ### Games ###
+    minetest                # 
+    polymc                  # Downloads non-free Minecraft (compiled) JAR-file!
+  ];
+
+  showPkgs = with pkgs; [
+    ### Showing off ###
+    neofetch                # 
+    uwufetch                # 
+  ];
+
+  laptopPkgs = with pkgs; [
+    acpi                    # 
+    light                   # 
+  ];
+
+  nonFreePkgs = with pkgs; [
+    ### Nonfree ###
+    rustdesk                # [NONFREEDEP]
+    trezor-suite            # [NONFREE?]
+  ];
+
+in {
+  # Install packages
+  home = {
+    # Add "++ laptopPkgs" if running on a laptop
+    packages = toolPkgs ++ devPkgs ++ lintPkgs ++ pwnPkgs ++
+      revEngineeringPkgs ++ soundPkgs ++ secPkgs ++ encPkgs ++
+      syncPkgs ++ osintPkgs ++ fontPkgs ++ identPkgs ++ socialPkgs ++
+      browserPkgs ++ docPkgs ++ mediaEditPkgs ++ fileSharingPkgs ++
+      dlPkgs ++ mediaViewPkgs ++ recPkgs ++ cCurrPkgs ++ gamePkgs ++
+      showPkgs;
+    sessionVariables = {
+      DISPLAY = ":0";
+      EDITOR = "nvim";
+    };
+  };
+
+  xdg.enable = true;
+
   # Manage services
   services = {
     syncthing = {
       enable = true;
       #tray.enable = true;  # systemctl can't find tray.target
     };
+
     keybase = {
-      enable = true;
+      enable = false;
     };
+
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -157,24 +233,26 @@
   };
 
   # Manage programs
-  programs.gpg = {
-    enable = true;
-  };
   programs = {
+    gpg.enable = true;
+
     zsh = {  # From https://www.reddit.com/r/NixOS/comments/jlcckh/comment/gap2tdk/?utm_source=share&utm_medium=web2x&context=3
       enable = true;
       enableCompletion = false;  # Enabled in oh-my-zsh
       initExtra = ''
         test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
+        test -f ~/.config/term/ls_colors && source ~/.config/term/ls_colors
       '';
       shellAliases = {
         #doas = "sudo";  # using doas by default
-	#docker = "sudo docker";  # using rootless podman
+        #docker = "sudo docker";  # using rootless podman
+        git-push = "git remote | xargs -L1 git push --all";  # push all branches to all remotes
+        git-push-master = "git remote | xargs -L1 -I R git push R master"; # push "master" branch to all remotes
       };
       oh-my-zsh = {
         enable = true;
-	plugins = [ "git" "systemd" "rsync" "kubectl" ];
-	theme = "terminalparty";  # terminalparty eastwood fishy
+        plugins = [ "git" "systemd" "rsync" "kubectl" ];
+        theme = "terminalparty";  # terminalparty eastwood fishy
       };
       enableSyntaxHighlighting = true;
       enableAutosuggestions = true;
@@ -182,16 +260,13 @@
         source $HOME/.config/env
       '';
       history = {
-        #path = "$HOME/.local/share/zsh/history";  # Doesn't seem to work
         extended = true;
         ignoreDups = true;  # true by default
         save = 500000;  # Number of lines to save
         size = 500000;  # Number of history lines to keep
       };
     };
-    #ssh = {  # TODO: Fix
-    #  startAgent = true;
-    #};
+
     git = {  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.git.signing
       enable = true;
       userName = "0xb1b1";
@@ -203,13 +278,18 @@
       };
       signing = {
         key = "D2AC7A8F8CBF358416EF12ECF76D87C85967B1B1";
-	signByDefault = true;
+        signByDefault = true;
       };
     };
+
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [ coc-rust-analyzer ];
     };
+
+    obs-studio = {
+      enable = true;
+      plugins = [];
+    };
   };
 }
-

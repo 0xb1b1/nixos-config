@@ -11,7 +11,7 @@ let
     config.allowUnfree = false;
     config.xdg.configHome = configHome;
 
-    overlays = [  ];
+    #overlays = [  ];
   };
 
   mkHome = { hidpi ? false }: (

@@ -191,6 +191,8 @@ let
   ];
 
 in {
+  programs.home-manager.enable = true;
+
   # Install packages
   home = {
     # Add "++ laptopPkgs" if running on a laptop

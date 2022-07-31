@@ -245,7 +245,7 @@ in {
       '';
       shellAliases = {
         #doas = "sudo";  # using doas by default
-        #docker = "sudo docker";  # using rootless podman
+        #docker = "sudo docker";
         git-push = "git remote | xargs -L1 git push --all";  # push all branches to all remotes
         git-push-master = "git remote | xargs -L1 -I R git push R master"; # push "master" branch to all remotes
       };

@@ -14,9 +14,9 @@ let
     #overlays = [  ];
   };
 
-  mkHome = { hidpi ? false }: (
+  mkVoxelHome = { }: (
     home-manager.lib.homeManagerConfiguration rec {
-      inherit pkgs;
+      inherit pkgs;  # Panics at [required] system username homeDirectory configuration <- configuration not defined
       modules = [
         {
           imports = [ ../home/home.nix ];
@@ -29,8 +29,8 @@ let
         }
       ];
     });
+
 in
 {
-  voxel-edp = mkHome { hidpi = false; };
-  voxel-hdmi = mkHome { hidpi = true; };
+  voxel = mkVoxelHome { };
 }

@@ -45,6 +45,7 @@ let
     kubectl                 # 
     vscodium-fhs            # 
     emacs                   # 
+    android-tools           # 
   ];
 
   lintPkgs = with pkgs; [

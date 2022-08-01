@@ -135,8 +135,9 @@
   ];
 
   # Add udev rules.
-  services.udev.packages = [
-    pkgs.trezor-udev-rules
+  services.udev.packages = with pkgs; [
+    trezor-udev-rules
+    android-udev-rules
   ];
 
   # Enable gcr on dbus for gnome pinentry.

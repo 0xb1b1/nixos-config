@@ -191,7 +191,7 @@ let
   ];
 
 in {
-  programs.home-manager.enable = true;
+  #programs.home-manager.enable = true;  # Not working without Flakes (?)
 
   # Install packages
   home = {

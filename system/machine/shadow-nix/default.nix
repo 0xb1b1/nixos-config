@@ -8,12 +8,23 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
 
-    # Use the systemd-boot EFI boot loader.
+    # Use the systemd-boot EFI bootloader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-
-    initrd.kernelModules = [ "amdgpu" ];
+    loader.efi.efiSysMountPoint = "/boot/efi";
   };
+
+  # Setup keyfile.
+  boot.initrd = {
+    secrets = {
+      "/crypto_keyfile.bin" = null;
+    };
+    kernelModules = [ "amdgpu" ];
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".device = "/dev/disk/by-uuid/aaff553d-5b8e-4cf7-89be-2238e473b503";
+  boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".keyFile = "/crypto_keyfile.bin";
 
   networking = {
     hostName = "shadow-nix";

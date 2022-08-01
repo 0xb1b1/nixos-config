@@ -5,7 +5,31 @@
 { config, pkgs, ... }:
 
 {
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-bfe69e52-7676-4bcd-8c5a-0a5dcd247146".device = "/dev/disk/by-uuid/bfe69e52-7676-4bcd-8c5a-0a5dcd247146";
+  boot.initrd.luks.devices."luks-bfe69e52-7676-4bcd-8c5a-0a5dcd247146".keyFile = "/crypto_keyfile.bin";
+
+  networking.hostName = "outline"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary.
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Configure networking.
   networking.networkmanager = {
@@ -25,25 +49,23 @@
   ### SECURITY ###
 
   # Enable Docker.
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
 
-  # Enable Podman.  # Docker is temporarily preferred due to Podman requiring OCI-Containers SystemD service to run (too complex for me at the moment)
-  # TODO: Re-enable Podman with OCI-Containers SystemD services
-  # virtualisation.podman = {
-  #   enable = true;
-  #   dockerCompat = true;
-  #   defaultNetwork = {
-  #     dnsname.enable = true;
-  #   };
-  #   dockerSocket.enable = true;
-  # };
+  # Enable Podman.
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork = {
+      dnsname.enable = true;
+    };
+  };
 
   # Enable libvirt (KVM).
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
   # User settings.
-  users.mutableUsers = false;
+  users.mutableUsers = true;
   boot.kernelParams = [ "nohibernate" ];
 
   # Configure keymap in X11.
@@ -51,6 +73,9 @@
     layout = "us";
     xkbVariant = "";
   };
+
+  # Fix touchpad
+  services.xserver.libinput.enable = true;
 
   # Enable the X11 windowing system and awesomeWM.
   services.xserver = {
@@ -80,29 +105,33 @@
     jack.enable = true;
   };
 
-  # Define user accounts.
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     voxel = {
       isNormalUser = true;
       description = "voxel";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
       shell = pkgs.zsh;
-      hashedPassword = "$6$cQWJCPMwSqsbh9r$xhnVcK.SONgK7P60uNPaJjoAtXXZdKbuy7YpKGzabWJuOte8LVNjNk4lTHEwvtX5SKagTgr24qwFxNkc3HRWY0";
+    };
+    arina = {
+      isNormalUser = true;
+      description = "arina";
+      shell = pkgs.bash;
     };
   };
 
-  # Configure sudo. (required my minikube)
+  # Configure sudo.
   security.sudo.enable = true;
   security.sudo.extraRules = [
-    {
-      users = [ "voxel" ];
-      commands = [
-        {
-         command = "ALL";
-         options = [ "NOPASSWD" ];
-        }
-      ];
-    }
+   {
+     users = [ "voxel" ];
+     commands = [
+       {
+        command = "ALL";
+        options = [ "NOPASSWD" ];
+       }
+     ];
+   }
   ];
 
   # Configure doas.
@@ -120,14 +149,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git
     gcc
     neovim
     wget
     zsh
     lsof
     virt-manager
-    #podman-compose
+    podman-compose
     dnsname-cni
     minikube
     shadowsocks-rust
@@ -140,7 +168,7 @@
   ];
 
   # Enable gcr on dbus for gnome pinentry.
-  #services.dbus.packages = [ pkgs.gcr ];
+  services.dbus.packages = [ pkgs.gcr ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -149,13 +177,21 @@
 
   # List services that you want to enable:
 
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "no";
+    passwordAuthentication = false;
+  };
+
   # Open ports in the firewall.
-  # [Services list]
-  networking.firewall.allowedTCPPorts = [  ];
 
-  # [Services list]
-  networking.firewall.allowedUDPPorts = [  ];
-
+  # Syncthing
+  networking.firewall.allowedTCPPorts = [ 22000 ];
+  
+  # Syncthing, Syncthing, 
+  networking.firewall.allowedUDPPorts = [ 22000 21027 ]; 
+  
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -171,8 +207,7 @@
   nix = {
     # Enable Flakes.
     package = pkgs.nixFlakes;
-    # Set extra options
-    # (substituting is equal to using cache instead of building packages).
+    # Set extra options (substituting is equal to using cache instead of building packages).
     extraOptions = ''
     substitute = true
     experimental-features = nix-command flakes

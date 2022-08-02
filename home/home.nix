@@ -3,7 +3,7 @@
 let
   toolPkgs = with pkgs; [
     ### Tools ###
-    home-manager            # Reconfigure a user environment
+    #home-manager            # Reconfigure a user environment
     alacritty               # Fast, cross-platform, OpenGL terminal emulator written in Rust
     cool-retro-term         # Cool Retro Terminal emulator
     dmenu                   # Dynamic GUI menu
@@ -33,19 +33,20 @@ let
     ### Development ###
     gnumake                 # Development environment automatization
     cmake                   # Family of tools designed to build, test and package software
-    rustup                  # The Rust toolchain installer
-    maturin                 # 
-    gcc                     # 
-    python27                # 
-    python310               # 
-    go                      # 
-    nodejs                  # 
-    nodePackages.npm        # 
-    nodePackages.vue-cli    # 
-    kubectl                 # 
-    vscodium-fhs            # 
-    emacs                   # 
-    android-tools           # 
+    rustup                  # Rust toolchain installer
+    maturin                 # Build and publish Rust crates Python packages
+    gcc                     # GNU Compiler Collection
+    python27                # High-level dynamically-typed programming language
+    python310               # High-level dynamically-typed programming language
+    go                      # The Go Programming language
+    nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
+    nodePackages.npm        # Package manager for JavaScript
+    nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
+    kubectl                 # Kubernetes CLI
+    vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
+    emacs                   # The extensible, customizable GNU text editor
+    android-tools           # Android SDK platform tools
+    drone-cli               # Command line client for the Drone continuous integration server
   ];
 
   lintPkgs = with pkgs; [
@@ -192,7 +193,7 @@ let
   ];
 
 in {
-  #programs.home-manager.enable = true;  # Not working without Flakes (?)
+  programs.home-manager.enable = true;
 
   # Install packages
   home = {

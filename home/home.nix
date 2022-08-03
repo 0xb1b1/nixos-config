@@ -46,6 +46,7 @@ let
     vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
+    openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
   ];
 
   lintPkgs = with pkgs; [
@@ -99,6 +100,7 @@ let
   fontPkgs = with pkgs; [
     ### Fonts ###
     cascadia-code           # Monospaced font that includes programming ligatures
+    ipaexfont               # Japanese font package with Mincho and Gothic fonts
   ];
 
   identPkgs = with pkgs; [
@@ -176,6 +178,7 @@ let
     ### Showing off ###
     neofetch                # Fast, highly customizable system info script
     uwufetch                # Meme system info tool for Linux
+    cmatrix                 # Simulates the falling characters theme from The Matrix movie
   ];
 
   laptopPkgs = with pkgs; [

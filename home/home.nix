@@ -51,18 +51,18 @@ let
 
   lintPkgs = with pkgs; [
     ### Linters ###
-    rust-analyzer           # 
+    rust-analyzer           # Modular compiler frontend for the Rust language
     #vimPlugins.coc-rust-analyzer
   ];
 
   pwnPkgs = with pkgs; [
     ### Pwning ###
-    inetutils               # 
-    samba                   # 
-    redis                   # 
-    gobuster                # 
-    mariadb                 # 
-    postgresql              # 
+    inetutils               # Collection of common network programs
+    samba                   # Standard Windows interoperability suite of programs for Linux and Unix
+    redis                   # Open source, advanced key-value store
+    gobuster                # Tool used to brute-force URIs, DNS subdomains, Virtual Host names on target web servers
+    mariadb                 # Enhanced, drop-in replacement for MySQL
+    postgresql              # Powerful, open source object-relational database system
   ];
 
   revEngineeringPkgs = with pkgs; [
@@ -72,24 +72,23 @@ let
 
   soundPkgs = with pkgs; [
     ### Sound ###
-    pavucontrol             # 
-    #xfce.xfce4-pulseaudio-plugin
+    pavucontrol             # PulseAudio Volume Control
   ];
 
   secPkgs = with pkgs; [
     ### Security ###
-    keepassxc               # 
-    i3lock                  # 
+    keepassxc               # Offline password manager with many features
+    i3lock                  # Simple screen locker like slock
   ];
 
   encPkgs = with pkgs; [
     ### Encryption ###
-    cryptomator             # 
+    cryptomator             # Free client-side encryption for your cloud files
   ];
 
   syncPkgs = with pkgs; [
     ### Syncronization ###
-    #syncthing              # Enabled as a service
+    #syncthing              # [Enabled as a service] Open Source Continuous File Synchronization
   ];
 
   osintPkgs = with pkgs; [
@@ -100,96 +99,96 @@ let
 
   fontPkgs = with pkgs; [
     ### Fonts ###
-    cascadia-code           # 
+    cascadia-code           # Monospaced font that includes programming ligatures
   ];
 
   identPkgs = with pkgs; [
     ### Identity ###
-    keybase                 # 
+    keybase                 # Keybase official command-line utility and service
   ];
 
   socialPkgs = with pkgs; [
     ### Social ###
-    element-desktop         # 
-    threema-desktop         # 
-    #tdesktop               # 
-    telegram-cli            # 
-    kotatogram-desktop      # 
-    thunderbird             # 
+    element-desktop         # Feature-rich Matrix client
+    threema-desktop         # Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger
+    #tdesktop               # Telegram Desktop messaging app
+    telegram-cli            # Command-line interface for Telegram
+    kotatogram-desktop      # Kotatogram – experimental Telegram Desktop fork
+    thunderbird             # Full-featured e-mail client
   ];
 
   browserPkgs = with pkgs; [
     ### Browsers ###
-    firefox                 # 
-    #librewolf              # 
-    #chromium               # 
-    tor-browser-bundle-bin  # 
-    lynx                    # 
+    firefox                 # Web browser built from Firefox source tree
+    #librewolf              # Fork of Firefox, focused on privacy, security and freedom
+    #chromium               # Open source web browser from an evil company
+    tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
+    lynx                    # Text-mode web browser
   ];
 
   docPkgs = with pkgs; [
     ### Documents ###
-    libreoffice-fresh       # 
+    libreoffice-fresh       # Comprehensive, professional-quality productivity suite, a variant of openoffice.org
   ];
 
   mediaEditPkgs = with pkgs; [
     ### Media editing ###
-    darktable               # 
-    libsForQt5.kdenlive     # 
-    handbrake               # 
+    darktable               # Virtual lighttable and darkroom for photographers
+    libsForQt5.kdenlive     # Video editor
+    handbrake               # Tool for converting video files and ripping DVDs
   ];
 
   fileSharingPkgs = with pkgs; [
     ### Filesharing ###
-    ipfs                    # 
-    transmission-gtk        # 
+    ipfs                    # Global, versioned, peer-to-peer filesystem
+    transmission-gtk        # Fast, easy and free BitTorrent client
   ];
 
   dlPkgs = with pkgs; [
     ### Downloads ###
-    youtube-dl              # 
-    hakuneko                # 
+    youtube-dl              # Command-line tool to download videos from YouTube.com and other sites
+    hakuneko                # Manga & Anime Downloader
   ];
 
   mediaViewPkgs = with pkgs; [
     ### Media, streaming ###
-    mpv                     # 
-    ani-cli                 # 
-    vlc                     # 
+    mpv                     # General-purpose media player, fork of MPlayer and mplayer2
+    ani-cli                 # Cli tool to browse and play anime
+    vlc                     # Cross-platform media player and streaming server
   ];
 
   recPkgs = with pkgs; [
     ### Recording ###
-    asciinema               # 
+    asciinema               # Terminal session recorder
   ];
 
   cCurrPkgs = with pkgs; [
     ### Cryptocurrency ###
-    trezord                 # 
+    trezord                 # Trezor Communication Daemon aka Trezor Bridge
     # trezor-suite - unfree license!
   ];
 
   gamePkgs = with pkgs; [
     ### Games ###
-    minetest                # 
-    polymc                  # Downloads non-free Minecraft (compiled) JAR-file!
+    minetest                # Infinite-world block sandbox game
+    polymc                  # [NONFREEDEP] Free, open source launcher for Minecraft
   ];
 
   showPkgs = with pkgs; [
     ### Showing off ###
-    neofetch                # 
-    uwufetch                # 
+    neofetch                # Fast, highly customizable system info script
+    uwufetch                # Meme system info tool for Linux
   ];
 
   laptopPkgs = with pkgs; [
-    acpi                    # 
-    light                   # 
+    acpi                    # Show battery status and other ACPI information
+    light                   # GNU/Linux application to control backlights
   ];
 
   nonFreePkgs = with pkgs; [
     ### Nonfree ###
-    rustdesk                # [NONFREEDEP]
-    trezor-suite            # [NONFREE?]
+    rustdesk                # [NONFREEDEP] Yet another remote desktop software
+    trezor-suite            # [NONFREE?] Trezor Suite - Desktop App for managing crypto
   ];
 
 in {

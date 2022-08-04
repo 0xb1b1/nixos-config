@@ -27,6 +27,7 @@ let
     gotop                   # TUI system resource visualizer
     appimage-run            # AppImage executor
     glow                    # Markdown CLI renderer
+    tea                     # Gitea official CLI client
   ];
 
   devPkgs = with pkgs; [
@@ -88,7 +89,7 @@ let
 
   syncPkgs = with pkgs; [
     ### Syncronization ###
-    # syncthing              # Enabled as a service
+    #syncthing              # [Enabled as a service] Open Source Continuous File Synchronization
   ];
 
   osintPkgs = with pkgs; [
@@ -110,19 +111,19 @@ let
 
   socialPkgs = with pkgs; [
     ### Social ###
-    element-desktop         # Feature-rich client for the Matrix network
+    element-desktop         # Feature-rich Matrix client
     threema-desktop         # Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger
-    # tdesktop               # Telegram Desktop messaging app
+    #tdesktop               # Telegram Desktop messaging app
+    telegram-cli            # Command-line interface for Telegram
     kotatogram-desktop      # Kotatogram – experimental Telegram Desktop fork
-    telegram-cli            # Command-line interface for Telegram, that uses readline interface, it's a client implementation of TGL library
     thunderbird             # Full-featured e-mail client
   ];
 
   browserPkgs = with pkgs; [
     ### Browsers ###
     firefox                 # Web browser built from Firefox source tree
-    # librewolf              # Fork of Firefox, focused on privacy, security and freedom
-    # chromium               # OSS web browser from an evil company
+    #librewolf              # Fork of Firefox, focused on privacy, security and freedom
+    #chromium               # Open source web browser from an evil company
     tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
     lynx                    # Text-mode web browser
   ];

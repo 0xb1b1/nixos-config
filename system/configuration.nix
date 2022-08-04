@@ -85,7 +85,7 @@
     voxel = {
       isNormalUser = true;
       description = "voxel";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "adbusers" ];
       shell = pkgs.zsh;
       hashedPassword = "$6$cQWJCPMwSqsbh9r$xhnVcK.SONgK7P60uNPaJjoAtXXZdKbuy7YpKGzabWJuOte8LVNjNk4lTHEwvtX5SKagTgr24qwFxNkc3HRWY0";
     };
@@ -139,6 +139,9 @@
     trezor-udev-rules
     android-udev-rules
   ];
+
+  # Enable android-tools.
+  programs.adb.enable = true;
 
   # Enable gcr on dbus for gnome pinentry.
   #services.dbus.packages = [ pkgs.gcr ];

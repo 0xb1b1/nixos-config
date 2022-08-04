@@ -3,13 +3,7 @@
 {
   imports =  [
     ./hardware-configuration.nix
-    "${modulesPath}/profiles/hardened.nix"
   ];
-
-  # Make hardened profile more usable        # This should be enabled alongside the hardened profile
-  security.allowUserNamespaces = true;       # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
-  security.lockKernelModules = false;        # https://discourse.nixos.org/t/default-security-settings/9755
-  #security.hideProcessInformation = false;  # -^ [ErrLog: The hidepid module was removed, since the underlying machinery is broken when using cgroups-v2.]
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;

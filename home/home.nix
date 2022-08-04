@@ -3,7 +3,7 @@
 let
   toolPkgs = with pkgs; [
     ### Tools ###
-    #home-manager            # Reconfigure a user environment
+    # home-manager            # Reconfigure a user environment
     alacritty               # Fast, cross-platform, OpenGL terminal emulator written in Rust
     cool-retro-term         # Cool Retro Terminal emulator
     dmenu                   # Dynamic GUI menu
@@ -38,31 +38,31 @@ let
     gcc                     # GNU Compiler Collection
     python27                # High-level dynamically-typed programming language
     python310               # High-level dynamically-typed programming language
-    go                      # The Go Programming language
+    go                      # Go Programming language
     nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
     kubectl                 # Kubernetes CLI
     vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
-    emacs                   # The extensible, customizable GNU text editor
-    android-tools           # Android SDK platform tools
+    emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
+    openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
   ];
 
   lintPkgs = with pkgs; [
     ### Linters ###
-    rust-analyzer           # 
-    #vimPlugins.coc-rust-analyzer
+    rust-analyzer           # Modular compiler frontend for the Rust language
+    # vimPlugins.coc-rust-analyzer
   ];
 
   pwnPkgs = with pkgs; [
     ### Pwning ###
-    inetutils               # 
-    samba                   # 
-    redis                   # 
-    gobuster                # 
-    mariadb                 # 
-    postgresql              # 
+    gobuster                # Tool used to brute-force URIs, DNS subdomains, Virtual Host names on target web servers
+    inetutils               # Collection of common network programs
+    samba                   # Standard Windows interoperability suite of programs for Linux and Unix
+    redis                   # Open source, advanced key-value store
+    mariadb                 # Enhanced, drop-in replacement for MySQL
+    postgresql              # Powerful, open source object-relational database system
   ];
 
   revEngineeringPkgs = with pkgs; [
@@ -72,24 +72,23 @@ let
 
   soundPkgs = with pkgs; [
     ### Sound ###
-    pavucontrol             # 
-    #xfce.xfce4-pulseaudio-plugin
+    pavucontrol             # PulseAudio Volume Control
   ];
 
   secPkgs = with pkgs; [
     ### Security ###
-    keepassxc               # 
-    i3lock                  # 
+    keepassxc               # Offline password manager with many features
+    i3lock                  # Simple screen locker like slock
   ];
 
   encPkgs = with pkgs; [
     ### Encryption ###
-    cryptomator             # 
+    cryptomator             # Free client-side encryption for your cloud files
   ];
 
   syncPkgs = with pkgs; [
     ### Syncronization ###
-    #syncthing              # Enabled as a service
+    # syncthing              # Enabled as a service
   ];
 
   osintPkgs = with pkgs; [
@@ -100,98 +99,99 @@ let
 
   fontPkgs = with pkgs; [
     ### Fonts ###
-    cascadia-code           # 
+    cascadia-code           # Monospaced font that includes programming ligatures
+    ipaexfont               # Japanese font package with Mincho and Gothic fonts
   ];
 
   identPkgs = with pkgs; [
     ### Identity ###
-    keybase                 # 
+    keybase                 # Keybase official command-line utility and service
   ];
 
   socialPkgs = with pkgs; [
     ### Social ###
-    element-desktop         # 
-    threema-desktop         # 
-    #tdesktop               # 
-    telegram-cli            # 
-    kotatogram-desktop      # 
-    thunderbird             # 
+    element-desktop         # Feature-rich client for the Matrix network
+    threema-desktop         # Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger
+    # tdesktop               # Telegram Desktop messaging app
+    kotatogram-desktop      # Kotatogram – experimental Telegram Desktop fork
+    telegram-cli            # Command-line interface for Telegram, that uses readline interface, it's a client implementation of TGL library
+    thunderbird             # Full-featured e-mail client
   ];
 
   browserPkgs = with pkgs; [
     ### Browsers ###
-    firefox                 # 
-    #librewolf              # 
-    #chromium               # 
-    tor-browser-bundle-bin  # 
-    lynx                    # 
+    firefox                 # Web browser built from Firefox source tree
+    # librewolf              # Fork of Firefox, focused on privacy, security and freedom
+    # chromium               # OSS web browser from an evil company
+    tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
+    lynx                    # Text-mode web browser
   ];
 
   docPkgs = with pkgs; [
     ### Documents ###
-    libreoffice-fresh       # 
+    libreoffice-fresh       # Comprehensive, professional-quality productivity suite, a variant of openoffice.org
   ];
 
   mediaEditPkgs = with pkgs; [
     ### Media editing ###
-    darktable               # 
-    libsForQt5.kdenlive     # 
-    handbrake               # 
+    darktable               # Virtual lighttable and darkroom for photographers
+    libsForQt5.kdenlive     # Video editor
+    handbrake               # Tool for converting video files and ripping DVDs
   ];
 
   fileSharingPkgs = with pkgs; [
     ### Filesharing ###
-    ipfs                    # 
-    transmission-gtk        # 
+    ipfs                    # Global, versioned, peer-to-peer filesystem
+    transmission-gtk        # Fast, easy and free BitTorrent client
   ];
 
   dlPkgs = with pkgs; [
     ### Downloads ###
-    youtube-dl              # 
-    hakuneko                # 
+    youtube-dl              # Command-line tool to download videos from YouTube.com and other sites
+    hakuneko                # Manga & Anime Downloader
   ];
 
   mediaViewPkgs = with pkgs; [
     ### Media, streaming ###
-    mpv                     # 
-    ani-cli                 # 
-    vlc                     # 
+    mpv                     # General-purpose media player, fork of MPlayer and mplayer2
+    ani-cli                 # Cli tool to browse and play anime
+    vlc                     # Cross-platform media player and streaming server
   ];
 
   recPkgs = with pkgs; [
     ### Recording ###
-    asciinema               # 
+    asciinema               # Terminal session recorder
   ];
 
   cCurrPkgs = with pkgs; [
     ### Cryptocurrency ###
-    trezord                 # 
-    # trezor-suite - unfree license!
+    trezord                 # Trezor Communication Daemon aka Trezor Bridge
   ];
 
   gamePkgs = with pkgs; [
     ### Games ###
-    minetest                # 
-    polymc                  # Downloads non-free Minecraft (compiled) JAR-file!
+    minetest                # Infinite-world block sandbox game
+    polymc                  # [NONFREE-DL] Free, open source launcher for Minecraft
   ];
 
   showPkgs = with pkgs; [
     ### Showing off ###
-    neofetch                # 
-    uwufetch                # 
+    neofetch                # Fast, highly customizable system info script
+    uwufetch                # Meme system info tool for Linux
+    cmatrix                 # Simulates the falling characters theme from The Matrix movie
   ];
 
   laptopPkgs = with pkgs; [
-    acpi                    # 
-    light                   # 
+    ### Packages for laptop hosts ###
+    acpi                    # Show battery status and other ACPI information
+    light                   # GNU/Linux application to control backlights
   ];
 
   nonFreePkgs = with pkgs; [
     ### Nonfree ###
-    rustdesk                # [NONFREEDEP]
-    trezor-suite            # [NONFREE?]
+    rustdesk                # [NONFREE_DEP] Yet another remote desktop software
+    trezor-suite            # [NONFREE_LICENSE] Trezor Suite - Desktop App for managing crypto
   ];
-
 in {
   programs.home-manager.enable = true;
 
@@ -216,7 +216,6 @@ in {
   services = {
     syncthing = {
       enable = true;
-      #tray.enable = true;  # systemctl can't find tray.target
     };
 
     keybase = {
@@ -256,7 +255,7 @@ in {
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "systemd" "rsync" "kubectl" ];
-        theme = "terminalparty";  # terminalparty eastwood fishy
+        theme = "terminalparty";  # Other themes: terminalparty eastwood fishy ...
       };
       enableSyntaxHighlighting = true;
       enableAutosuggestions = true;

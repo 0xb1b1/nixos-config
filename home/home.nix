@@ -27,6 +27,7 @@ let
     gotop                   # TUI system resource visualizer
     appimage-run            # AppImage executor
     glow                    # Markdown CLI renderer
+    tea                     # Gitea official CLI client
   ];
 
   devPkgs = with pkgs; [

@@ -61,25 +61,25 @@
     xkbVariant = "";
   };
 
-  #? Only one (singular!) window/display manager should be enabled.
-  # Enable X11 and awesomeWM.
-  services.xserver = {
-    enable = true;
-    # Configure a display manager.
-    displayManager = {
-      lightdm.enable = true;
-      defaultSession = "none+awesome";
-    };
-    windowManager.awesome = {
-      enable = true;
-      luaModules = with pkgs.luaPackages; [
-        luarocks # is the package manager for Lua modules
-        luadbi-mysql # Database abstraction layer
-      ];
-    };
-  };
+  #! Only one (singular!) display manager should be enabled.
+  # # Enable X11 and awesomeWM.
+  # services.xserver = {
+  #   enable = true;
+  #   # Configure a display manager.
+  #   displayManager = {
+  #     lightdm.enable = true;
+  #     defaultSession = "none+awesome";
+  #   };
+  #   windowManager.awesome = {
+  #     enable = true;
+  #     luaModules = with pkgs.luaPackages; [
+  #       luarocks # is the package manager for Lua modules
+  #       luadbi-mysql # Database abstraction layer
+  #     ];
+  #   };
+  # };
 
-  #? Only one (singular!) window/display manager should be enabled.
+  #! Only one (singular!) display manager should be enabled.
   # # Enable X11 and Gnome 3.
   # services.xserver = {
   #   enable = true;
@@ -110,6 +110,48 @@
   #   hitori # sudoku game
   #   atomix # puzzle game
   # ]);
+
+  #! Only one (singular!) display manager should be enabled.
+  services.xserver = {
+    enable = true;
+    # Configure a display manager.
+    displayManager = {
+      gdm.enable = true;
+      defaultSession = "none+awesome";
+    };
+    windowManager.awesome = {
+      enable = true;
+      luaModules = with pkgs.luaPackages; [
+        luarocks # is the package manager for Lua modules
+        luadbi-mysql # Database abstraction layer
+      ];
+    };
+    desktopManager.gnome = {
+      enable = true;
+    };
+  };
+
+  #? This setting affects Gnome 3.
+  # Disable some bundled Gnome 3 packages.
+  # Source: https://nixos.wiki/wiki/GNOME
+  environment.gnome.excludePackages = (with pkgs; [
+    #gnome-photos
+    gnome-tour
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    #gnome-music
+    gnome-terminal
+    #gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    #evince # document viewer
+    gnome-characters
+    #totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
 
   # Enable PipeWire.
   hardware.pulseaudio.enable = false;

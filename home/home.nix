@@ -28,6 +28,7 @@ let
     appimage-run            # AppImage executor
     glow                    # Markdown CLI renderer
     tea                     # Gitea official CLI client
+    file                    # Program that shows the type of files
   ];
 
   devPkgs = with pkgs; [
@@ -64,6 +65,7 @@ let
     redis                   # Open source, advanced key-value store
     mariadb                 # Enhanced, drop-in replacement for MySQL
     postgresql              # Powerful, open source object-relational database system
+    sqlmap                  # Automatic SQL injection and database takeover tool
   ];
 
   revEngineeringPkgs = with pkgs; [
@@ -123,7 +125,7 @@ let
     ### Browsers ###
     firefox                 # Web browser built from Firefox source tree
     #librewolf              # Fork of Firefox, focused on privacy, security and freedom
-    #chromium               # Open source web browser from an evil company
+    chromium               # Open source web browser from an evil company
     tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
     lynx                    # Text-mode web browser
   ];

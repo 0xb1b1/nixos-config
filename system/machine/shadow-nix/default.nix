@@ -104,6 +104,9 @@
       proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
 
+    # Custom setup
+    clientMaxBodySize = "20m";
+
     virtualHosts = {
       "seizure.icu" = {
         listen = [
@@ -122,24 +125,30 @@
         sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
         #locations."/".proxyPass = "http://127.0.0.1:23417";
         root = "/var/http/seizure.icu";
-	locations."/.well-known/" = {};
+        locations."/.well-known/" = {};
       };
       "jellyfin.seizure.icu" = {
         listen = [
-	  {
-	    addr = "0.0.0.0";
-	    port = 443;
-	    ssl = true;
-	  }
-	  {
-	    addr = "0.0.0.0";
-	    port = 80;
-	  }
-	];
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
         forceSSL = true;
-	sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
-	sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-        locations."/".proxyPass = "http://127.0.0.1:23402";
+        sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+        sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+        locations = {
+          #"/web/".proxyPass = "http://127.0.0.1:23402/web/index.html";
+          "/" = {
+            proxyPass = "http://127.0.0.1:23402";
+            proxyWebsockets = true;  # Thanks to https://git.alarsyo.net/alarsyo/nixos-config/commit/49a261e5ee97e8a91546600e57756eeef93b2472?style=split&whitespace=
+          };
+        };
       };
       "synapse.seizure.icu" = {
         listen = [

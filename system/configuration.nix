@@ -61,7 +61,8 @@
     xkbVariant = "";
   };
 
-  # Enable the X11 windowing system and awesomeWM.
+  #? Only one (singular!) window/display manager should be enabled.
+  # Enable X11 and awesomeWM.
   services.xserver = {
     enable = true;
     # Configure a display manager.
@@ -77,6 +78,38 @@
       ];
     };
   };
+
+  #? Only one (singular!) window/display manager should be enabled.
+  # # Enable X11 and Gnome 3.
+  # services.xserver = {
+  #   enable = true;
+  #   displayManager = {
+  #     gdm.enable = true;
+  #     defaultSession = "gnome";
+  #   };
+  #   desktopManager.gnome = {
+  #     enable = true;
+  #   };
+  # };
+  # # Disable some bundled Gnome 3 packages.
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   #gnome-photos
+  #   gnome-tour
+  # ]) ++ (with pkgs.gnome; [
+  #   cheese # webcam tool
+  #   #gnome-music
+  #   gnome-terminal
+  #   #gedit # text editor
+  #   epiphany # web browser
+  #   geary # email reader
+  #   #evince # document viewer
+  #   gnome-characters
+  #   #totem # video player
+  #   tali # poker game
+  #   iagno # go game
+  #   hitori # sudoku game
+  #   atomix # puzzle game
+  # ]);
 
   # Enable PipeWire.
   hardware.pulseaudio.enable = false;

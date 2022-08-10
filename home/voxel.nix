@@ -29,6 +29,7 @@ let
     glow                    # Markdown CLI renderer
     tea                     # Gitea official CLI client
     file                    # Program that shows the type of files
+    gnome.gnome-tweaks      # Gnome 3 DE tweaking tool
   ];
 
   devPkgs = with pkgs; [

@@ -1,36 +1,17 @@
-{ system, nixpkgs, home-manager, ... }:
+{ system, home-manager, ... }:
 
 let
-  username = "voxel";
-  homeDirectory = "/home/${username}";
-  configHome = "${homeDirectory}/.config";
-
-  pkgs = import nixpkgs {
-    inherit system;
-
-    config.allowUnfree = false;
-    config.xdg.configHome = configHome;
-
-    #overlays = [  ];
-  };
-
-  mkVoxelHome = { }: (
+  mkHome = username: config: (
     home-manager.lib.homeManagerConfiguration rec {
-      inherit pkgs;  # Panics at [required] system username homeDirectory configuration <- configuration not defined
-      modules = [
-        {
-          imports = [ ../home/home.nix ];
-        }
-        {
-          home = {
-            inherit username homeDirectory;
-            stateVersion = "22.05";
-          };
-        }
-      ];
+      inherit system username;
+      configuration = import config;
+
+      stateVersion = "22.05";
+      homeDirectory = "/home/${username}";
     });
 
 in
 {
-  voxel = mkVoxelHome { };
+  voxel = mkHome "voxel" ../home/voxel.nix;
+  arina = mkHome "arina" ../home/arina.nix;
 }

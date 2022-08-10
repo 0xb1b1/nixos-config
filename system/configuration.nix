@@ -9,10 +9,11 @@
     "${modulesPath}/profiles/hardened.nix"
   ];
 
-  # Make hardened profile more usable        # This should be enabled alongside the hardened profile
-  security.allowUserNamespaces = true;       # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
-  security.lockKernelModules = false;        # https://discourse.nixos.org/t/default-security-settings/9755
-  #security.hideProcessInformation = false;  # -^ [ErrLog: The hidepid module was removed, since the underlying machinery is broken when using cgroups-v2.]
+  # Make hardened profile more usable             # This should be enabled alongside the hardened profile
+  security.allowUserNamespaces = true;            # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
+  security.lockKernelModules = false;             # https://discourse.nixos.org/t/default-security-settings/9755
+  #security.hideProcessInformation = false;       # -^ [ErrLog: The hidepid module was removed, since the underlying machinery is broken when using cgroups-v2.]
+  environment.memoryAllocator.provider = "libc";  # Proposed by j-k <dev@j-k.io>
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

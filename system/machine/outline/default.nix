@@ -28,6 +28,7 @@
 
   # Fix touchpad.
   services.xserver.libinput.enable = true;
+  #services.xserver.synaptics.enable = true;  # https://www.reddit.com/r/NixOS/comments/cbi1tm/comment/etfmr9r/  #! Doesn't work
 
   networking = {
     hostName = "outline";

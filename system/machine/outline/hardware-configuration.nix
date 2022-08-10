@@ -13,6 +13,10 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # Fix touchpad
+  # https://discourse.nixos.org/t/touchpad-click-not-working/12276
+  #boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];  #! Doesn't work
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/244e07c7-206e-4d24-a9a5-9fcaec1d2762";
       fsType = "ext4";

@@ -225,6 +225,23 @@
         sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
         locations."/".proxyPass = "http://127.0.0.1:23422";
       };
+      "nextcloud.seizure.icu" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
+        forceSSL = true;
+        sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+        sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+        locations."/".proxyPass = "http://127.0.0.1:23400";
+      };
     };
   };
 }

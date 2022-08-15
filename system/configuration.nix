@@ -223,6 +223,7 @@
     minikube
     shadowsocks-rust
     openvpn
+    ntfs3g
   ];
 
   # Add udev rules.

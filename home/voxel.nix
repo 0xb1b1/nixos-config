@@ -176,6 +176,7 @@ let
     ### Games ###
     minetest                # Infinite-world block sandbox game
     polymc                  # [NONFREE-DL] Free, open source launcher for Minecraft
+    airshipper              # Provides automatic updates for the voxel RPG Veloren
   ];
 
   showPkgs = with pkgs; [

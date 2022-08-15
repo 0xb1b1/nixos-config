@@ -42,8 +42,8 @@
 
   # Open ports in the firewall.
   # [ Syncthing, Podman (PiHole), NGINX, NGINX, Dev, Dev, Podman (Gitea SSH), Podman (rustdesk),
-  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), ]
-  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 23410 21115 21116 21117 21118 21119 ];
+  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (Veloren), Podman (Veloren) ]
+  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 23410 21115 21116 21117 21118 21119 14004 14005 ];
   # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), ]
   networking.firewall.allowedUDPPorts = [ 22000 21027 53 21116 ];
 

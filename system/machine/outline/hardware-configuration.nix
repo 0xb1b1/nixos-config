@@ -41,4 +41,7 @@
   # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
 }

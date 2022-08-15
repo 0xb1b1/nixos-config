@@ -40,15 +40,8 @@
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
-  # Define additional users.
-  # users.users = {
-  #   arina = {
-  #     isNormalUser = true;
-  #     description = "arina";
-  #     shell = pkgs.bash;
-  #     hashedPassword = "$6$cQWJCPMwSqsbh9r$mIALQWkszxd8W4lHHq9JLkJIOLzRnfre9RVBFoidi1zssk9rvPZEAvtRCMqc5tTkq95ZfOLIcLomAzbXkvX7F1";
-  #   };
-  # };
+  # Enable blueman.
+  services.blueman.enable = true;
 
   # List packages installed per-machine in system profile. To search, run:
   # $ nix search wget

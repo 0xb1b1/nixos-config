@@ -14,18 +14,6 @@
     loader.efi.efiSysMountPoint = "/boot/efi";
   };
 
-  # Setup keyfile.
-  boot.initrd = {
-    secrets = {
-      "/crypto_keyfile.bin" = null;
-    };
-    kernelModules = [ "amdgpu" ];
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".device = "/dev/disk/by-uuid/aaff553d-5b8e-4cf7-89be-2238e473b503";
-  boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".keyFile = "/crypto_keyfile.bin";
-
   # Configure networking.
   networking = {
     hostName = "shadow-nix";

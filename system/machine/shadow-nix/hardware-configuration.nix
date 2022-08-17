@@ -7,7 +7,7 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-amd" "amdgpu" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -25,6 +25,17 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/c7f8081e-f426-4469-b056-5a24191b0c9f"; }
     ];
+
+  # Setup keyfile.
+  boot.initrd = {
+    secrets = {
+      "/crypto_keyfile.bin" = null;
+    };
+  };
+
+  # Enable swap on LUKS.
+  boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".device = "/dev/disk/by-uuid/aaff553d-5b8e-4cf7-89be-2238e473b503";
+  boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".keyFile = "/crypto_keyfile.bin";
 
   # Mount drives.
   # Load LUKS keyfiles (https://gitlab.utc.fr/huetremy/nixos/-/blob/master/hardware-configuration.nix.example)

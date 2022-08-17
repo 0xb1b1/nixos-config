@@ -14,18 +14,6 @@
     loader.efi.efiSysMountPoint = "/boot/efi";
   };
 
-  # Setup keyfile
-  boot.initrd = {
-    secrets = {
-      "/crypto_keyfile.bin" = null;
-    };
-    kernelModules = [ "amdgpu" ];
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-bfe69e52-7676-4bcd-8c5a-0a5dcd247146".device = "/dev/disk/by-uuid/bfe69e52-7676-4bcd-8c5a-0a5dcd247146";
-  boot.initrd.luks.devices."luks-bfe69e52-7676-4bcd-8c5a-0a5dcd247146".keyFile = "/crypto_keyfile.bin";
-
   # Fix touchpad.
   services.xserver.libinput.enable = true;
 

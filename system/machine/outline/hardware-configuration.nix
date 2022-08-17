@@ -10,7 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-amd" "amdgpu" ];
   boot.extraModulePackages = [ ];
 
   # Fix touchpad
@@ -32,6 +32,17 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/54b1c0cd-770d-42cb-b562-661692fbf201"; }
     ];
+
+  # Setup keyfile.
+  boot.initrd = {
+    secrets = {
+      "/crypto_keyfile.bin" = null;
+    };
+  };
+
+  # Enable swap on LUKS.
+  boot.initrd.luks.devices."luks-bfe69e52-7676-4bcd-8c5a-0a5dcd247146".device = "/dev/disk/by-uuid/bfe69e52-7676-4bcd-8c5a-0a5dcd247146";
+  boot.initrd.luks.devices."luks-bfe69e52-7676-4bcd-8c5a-0a5dcd247146".keyFile = "/crypto_keyfile.bin";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

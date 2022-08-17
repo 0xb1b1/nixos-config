@@ -28,13 +28,15 @@
 
   # Fix touchpad.
   services.xserver.libinput.enable = true;
-  #services.xserver.synaptics.enable = true;  # https://www.reddit.com/r/NixOS/comments/cbi1tm/comment/etfmr9r/  #! Doesn't work
 
+  # Configure networking.
   networking = {
     hostName = "outline";
     interfaces = {
       wlp2s0.useDHCP = true;
     };
+    # Configure DNS.
+    networkmanager.insertNameservers = [ "1.1.1.1" "1.0.0.1" ];
     # Configure network proxy if necessary.
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";

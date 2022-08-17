@@ -26,11 +26,14 @@
   boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".device = "/dev/disk/by-uuid/aaff553d-5b8e-4cf7-89be-2238e473b503";
   boot.initrd.luks.devices."luks-aaff553d-5b8e-4cf7-89be-2238e473b503".keyFile = "/crypto_keyfile.bin";
 
+  # Configure networking.
   networking = {
     hostName = "shadow-nix";
     interfaces = {
       eno1.useDHCP = true;
     };
+    # Configure DNS.
+    networkmanager.insertNameservers = [ "127.0.0.1" ];  # PiHole
     # Configure network proxy if necessary.
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";

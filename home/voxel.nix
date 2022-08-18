@@ -170,6 +170,7 @@ let
   cCurrPkgs = with pkgs; [
     ### Cryptocurrency ###
     trezord                 # Trezor Communication Daemon aka Trezor Bridge
+    monero-gui              # Private, secure, untraceable currency
   ];
 
   gamePkgs = with pkgs; [

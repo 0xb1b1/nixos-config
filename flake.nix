@@ -11,27 +11,27 @@
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager }:
-    let
-      system = "x86_64-linux";
-    in
-    {
-      homeConfigurations = (
-        import ./outputs/home-conf.nix {
-          inherit system nixpkgs home-manager;
-        }
-      );
+  let
+    system = "x86_64-linux";
+  in
+  {
+    homeConfigurations = (
+      import ./outputs/home-conf.nix {
+        inherit system nixpkgs home-manager;
+      }
+    );
 
-      nixosConfigurations = (
-        import ./outputs/nixos-conf.nix {
-          inherit (nixpkgs) lib;
-          inherit inputs system;
-        }
-      );
+    nixosConfigurations = (
+      import ./outputs/nixos-conf.nix {
+        inherit (nixpkgs) lib;
+        inherit inputs system;
+      }
+    );
 
-      devShell.${system} = (
-        import ./outputs/installation.nix {
-          inherit system nixpkgs;
-        }
-      );
-    };
+    devShell.${system} = (
+      import ./outputs/installation.nix {
+        inherit system nixpkgs;
+      }
+    );
+  };
 }

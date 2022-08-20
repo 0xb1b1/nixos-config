@@ -33,10 +33,10 @@
 
   # Open ports in the firewall.
   # [ Syncthing, Podman (PiHole), NGINX, NGINX, Dev, Dev, Podman (Gitea SSH), Podman (rustdesk),
-  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (Veloren), Podman (Veloren) ]
-  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 23410 21115 21116 21117 21118 21119 14004 14005 ];
-  # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), ]
-  networking.firewall.allowedUDPPorts = [ 22000 21027 53 21116 ];
+  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (Veloren), Podman (Veloren), Docker Swarm, Docker Swarm, Docker Swarm ]
+  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 23410 21115 21116 21117 21118 21119 14004 14005 2376 2377 7946 ];
+  # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), Docker Swarm, Docker Swarm ]
+  networking.firewall.allowedUDPPorts = [ 22000 21027 53 21116 7946 4789 ];
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -232,6 +232,77 @@
         sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
         sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
         locations."/".proxyPass = "http://127.0.0.1:23400";
+      };
+      "jitsi.seizure.icu" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
+        forceSSL = true;
+        sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+        sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+        locations."/".proxyPass = "http://127.0.0.1:23424";
+      };
+      "home.seizure.icu" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
+        forceSSL = true;
+        sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+        sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+        locations."/".proxyPass = "http://127.0.0.1:23429";
+      };
+      "status.seizure.icu" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
+        forceSSL = true;
+        sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+        sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:23418";
+          proxyWebsockets = true;
+        };
+      };
+      "pihole.seizure.icu" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+        ];
+        forceSSL = true;
+        sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+        sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+        locations."/".proxyPass = "http://127.0.0.1:23411";
       };
       "mmath.seizure.icu" = {
         listen = [

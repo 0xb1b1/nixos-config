@@ -5,17 +5,14 @@
 { config, pkgs, modulesPath, ... }:
 
 {
-  imports =  [
-    "${modulesPath}/profiles/hardened.nix"
+  imports = [
+    ./modules
   ];
 
   # Make hardened profile more usable             # This should be enabled alongside the hardened profile
   security.allowUserNamespaces = true;            # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
   security.lockKernelModules = false;             # https://discourse.nixos.org/t/default-security-settings/9755
-  #security.hideProcessInformation = false;       # -^ [ErrLog: The hidepid module was removed, since the underlying machinery is broken when using cgroups-v2.]
   environment.memoryAllocator.provider = "libc";  # Proposed by j-k <dev@j-k.io>
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure networking.
   networking.networkmanager = {
@@ -26,137 +23,11 @@
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
-
-  ### SECURITY ###
-  # Enable AppArmor.
-  security.apparmor.enable = true;
-  ### SECURITY ###
-
-  # Enable Docker.
-  virtualisation.docker.enable = true;
-
-  # Enable Podman.  # Docker is temporarily preferred due to Podman requiring OCI-Containers SystemD service to run (too complex for me at the moment)
-  # TODO: Re-enable Podman with OCI-Containers SystemD services
-  # virtualisation.podman = {
-  #   enable = true;
-  #   dockerCompat = true;
-  #   defaultNetwork = {
-  #     dnsname.enable = true;
-  #   };
-  #   dockerSocket.enable = true;
-  # };
-
   # Enable libvirt (KVM).
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
-  # User settings.
-  users.mutableUsers = false;
   boot.kernelParams = [ "nohibernate" ];
-
-  # Configure keymap in X11.
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  #! Only one (singular!) display manager should be enabled.
-  services.xserver = {
-    enable = true;
-    # Configure a display manager.
-    displayManager = {
-      gdm.enable = true;
-      defaultSession = "none+awesome";
-    };
-    windowManager.awesome = {
-      enable = true;
-      luaModules = with pkgs.luaPackages; [
-        luarocks # is the package manager for Lua modules
-        luadbi-mysql # Database abstraction layer
-      ];
-    };
-    desktopManager.gnome = {
-      enable = true;
-    };
-  };
-
-  #? This setting affects Gnome 3.
-  # Disable some bundled Gnome 3 packages.
-  # Source: https://nixos.wiki/wiki/GNOME
-  environment.gnome.excludePackages = (with pkgs; [
-    #gnome-photos
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    #gnome-music
-    gnome-terminal
-    #gedit # text editor
-    epiphany # web browser
-    geary # email reader
-    #evince # document viewer
-    gnome-characters
-    #totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
-
-  # Enable PipeWire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  # Define user accounts.
-  users.users = {
-    voxel = {
-      isNormalUser = true;
-      description = "voxel";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "adbusers" ];
-      shell = pkgs.zsh;
-      hashedPassword = "$6$cQWJCPMwSqsbh9r$xhnVcK.SONgK7P60uNPaJjoAtXXZdKbuy7YpKGzabWJuOte8LVNjNk4lTHEwvtX5SKagTgr24qwFxNkc3HRWY0";
-    };
-    arina = {
-      isNormalUser = true;
-      description = "arina";
-      shell = pkgs.bash;
-      hashedPassword = "$6$cQWJCPMwSqsbh9r$mIALQWkszxd8W4lHHq9JLkJIOLzRnfre9RVBFoidi1zssk9rvPZEAvtRCMqc5tTkq95ZfOLIcLomAzbXkvX7F1";
-    };
-  };
-
-  # Configure sudo. (required my minikube)
-  security.sudo.enable = true;
-  security.sudo.extraRules = [
-    {
-      users = [ "voxel" ];
-      commands = [
-        {
-         command = "ALL";
-         options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
-  # Configure doas.
-  security.doas = {
-    enable = true;
-    extraRules = [
-      {
-        users = [ "voxel" ];
-	noPass = true;
-	keepEnv = true;
-      }
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -168,12 +39,13 @@
     zsh
     lsof
     virt-manager
-    #podman-compose
+    podman-compose
     dnsname-cni
     minikube
     shadowsocks-rust
     openvpn
     ntfs3g
+    proot
   ];
 
   # Add udev rules.
@@ -185,25 +57,10 @@
   # Enable android-tools.
   programs.adb.enable = true;
 
-  # Enable gcr on dbus for gnome pinentry.
-  #services.dbus.packages = [ pkgs.gcr ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
   services.pcscd.enable = true;
-
-  # List services that you want to enable:
-
-  # Open ports in the firewall.
-  # [Services list]
-  networking.firewall.allowedTCPPorts = [  ];
-
-  # [Services list]
-  networking.firewall.allowedUDPPorts = [  ];
-
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -213,7 +70,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-  # Install flakes
+  # Install flakes.
   nix = {
     # Enable Flakes.
     package = pkgs.nixFlakes;

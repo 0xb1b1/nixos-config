@@ -124,7 +124,7 @@ let
 
   browserPkgs = with pkgs; [
     ### Browsers ###
-    firefox                 # Web browser built from Firefox source tree
+    #firefox                 # Web browser built from Firefox source tree
     #librewolf              # Fork of Firefox, focused on privacy, security and freedom
     chromium               # Open source web browser from an evil company
     tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
@@ -200,6 +200,11 @@ let
   ];
 in {
   programs.home-manager.enable = true;
+
+  # Import configuration files.
+  imports = [
+    ./programs
+  ];
 
   # Install packages
   home = {

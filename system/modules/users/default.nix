@@ -20,8 +20,11 @@
     arina = {
       isNormalUser = true;
       description = "arina";
-      shell = pkgs.bash;
+      shell = pkgs.zsh;
       hashedPassword = "$6$cQWJCPMwSqsbh9r$mIALQWkszxd8W4lHHq9JLkJIOLzRnfre9RVBFoidi1zssk9rvPZEAvtRCMqc5tTkq95ZfOLIcLomAzbXkvX7F1";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIbLUONM0K9idIRgTANd+soJRpeJgPhfC+fTJUCM7Bv arina@hachpachmak"
+      ];
     };
   };
 }

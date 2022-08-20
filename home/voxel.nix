@@ -198,12 +198,13 @@ let
     rustdesk                # [NONFREE_DEP] Yet another remote desktop software
     trezor-suite            # [NONFREE_LICENSE] Trezor Suite - Desktop App for managing crypto
   ];
+
 in {
   programs.home-manager.enable = true;
 
   # Import configuration files.
   imports = [
-    ./programs
+    ./modules
   ];
 
   # Install packages

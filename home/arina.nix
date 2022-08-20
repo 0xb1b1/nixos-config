@@ -3,7 +3,6 @@
 let
   toolPkgs = with pkgs; [
     ### Tools ###
-    # home-manager            # Reconfigure a user environment
     alacritty               # Fast, cross-platform, OpenGL terminal emulator written in Rust
     cool-retro-term         # Cool Retro Terminal emulator
     dmenu                   # Dynamic GUI menu
@@ -45,33 +44,33 @@ let
     nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
-    # kubectl                 # Kubernetes CLI
+    #kubectl                 # Kubernetes CLI
     vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
-    # emacs                   # Extensible, customizable GNU text editor
-    # drone-cli               # Command line client for the Drone continuous integration server
-    # openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
+    #emacs                   # Extensible, customizable GNU text editor
+    #drone-cli               # Command line client for the Drone continuous integration server
+    #openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
   ];
 
   lintPkgs = with pkgs; [
     ### Linters ###
     rust-analyzer           # Modular compiler frontend for the Rust language
-    # vimPlugins.coc-rust-analyzer
+    #vimPlugins.coc-rust-analyzer
   ];
 
   pwnPkgs = with pkgs; [
     ### Pwning ###
-    # gobuster                # Tool used to brute-force URIs, DNS subdomains, Virtual Host names on target web servers
-    # inetutils               # Collection of common network programs
-    # samba                   # Standard Windows interoperability suite of programs for Linux and Unix
-    # redis                   # Open source, advanced key-value store
-    # mariadb                 # Enhanced, drop-in replacement for MySQL
-    # postgresql              # Powerful, open source object-relational database system
-    # sqlmap                  # Automatic SQL injection and database takeover tool
+    #gobuster                # Tool used to brute-force URIs, DNS subdomains, Virtual Host names on target web servers
+    #inetutils               # Collection of common network programs
+    #samba                   # Standard Windows interoperability suite of programs for Linux and Unix
+    #redis                   # Open source, advanced key-value store
+    #mariadb                 # Enhanced, drop-in replacement for MySQL
+    #postgresql              # Powerful, open source object-relational database system
+    #sqlmap                  # Automatic SQL injection and database takeover tool
   ];
 
   revEngineeringPkgs = with pkgs; [
     ### Reverse-engineering ###
-    # hexyl                 # Hex file viewer
+    #hexyl                 # Hex file viewer
   ];
 
   soundPkgs = with pkgs; [
@@ -97,19 +96,19 @@ let
 
   osintPkgs = with pkgs; [
     ### OSINT ###
-    # nmap                    # Network enumeration tool
-    # dnsrecon                # DNS enumeration tool
+    #nmap                    # Network enumeration tool
+    #dnsrecon                # DNS enumeration tool
   ];
 
   fontPkgs = with pkgs; [
     ### Fonts ###
     cascadia-code           # Monospaced font that includes programming ligatures
-    # ipaexfont               # Japanese font package with Mincho and Gothic fonts
+    #ipaexfont               # Japanese font package with Mincho and Gothic fonts
   ];
 
   identPkgs = with pkgs; [
     ### Identity ###
-    # keybase                 # Keybase official command-line utility and service
+    #keybase                 # Keybase official command-line utility and service
   ];
 
   socialPkgs = with pkgs; [
@@ -117,18 +116,18 @@ let
     element-desktop         # Feature-rich Matrix client
     threema-desktop         # Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger
     #tdesktop               # Telegram Desktop messaging app
-    # telegram-cli            # Command-line interface for Telegram
+    #telegram-cli            # Command-line interface for Telegram
     kotatogram-desktop      # Kotatogram – experimental Telegram Desktop fork
     thunderbird             # Full-featured e-mail client
   ];
 
   browserPkgs = with pkgs; [
     ### Browsers ###
-    # firefox                 # Web browser built from Firefox source tree
-    # librewolf               # Fork of Firefox, focused on privacy, security and freedom
+    firefox                 # Web browser built from Firefox source tree
+    #librewolf               # Fork of Firefox, focused on privacy, security and freedom
     chromium                # Open source web browser from an evil company
     tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
-    # lynx                    # Text-mode web browser
+    #lynx                    # Text-mode web browser
   ];
 
   docPkgs = with pkgs; [
@@ -169,7 +168,7 @@ let
 
   cCurrPkgs = with pkgs; [
     ### Cryptocurrency ###
-    # trezord                 # Trezor Communication Daemon aka Trezor Bridge
+    #trezord                 # Trezor Communication Daemon aka Trezor Bridge
   ];
 
   gamePkgs = with pkgs; [
@@ -181,7 +180,7 @@ let
   showPkgs = with pkgs; [
     ### Showing off ###
     neofetch                # Fast, highly customizable system info script
-    # uwufetch                # Meme system info tool for Linux
+    #uwufetch                # Meme system info tool for Linux
     cmatrix                 # Simulates the falling characters theme from The Matrix movie
   ];
 
@@ -194,12 +193,17 @@ let
   nonFreePkgs = with pkgs; [
     ### Nonfree ###
     rustdesk                # [NONFREE_DEP] Yet another remote desktop software
-    # trezor-suite            # [NONFREE_LICENSE] Trezor Suite - Desktop App for managing crypto
+    #trezor-suite            # [NONFREE_LICENSE] Trezor Suite - Desktop App for managing crypto
   ];
 in {
   programs.home-manager.enable = true;
 
-  # Install packages
+  # Import configuration files.
+  imports = [
+    ./modules
+  ];
+
+  # Install packages.
   home = {
     # Add "++ laptopPkgs" if running on a laptop
     packages = toolPkgs ++ devPkgs ++ lintPkgs ++ pwnPkgs ++
@@ -216,7 +220,7 @@ in {
 
   xdg.enable = true;
 
-  # Manage services
+  # Manage services.
   services = {
     syncthing = {
       enable = false;
@@ -239,64 +243,21 @@ in {
     };
   };
 
-  # Manage programs
+  # Manage programs.
   programs = {
-    gpg.enable = true;
-
-    zsh = {  # From https://www.reddit.com/r/NixOS/comments/jlcckh/comment/gap2tdk/?utm_source=share&utm_medium=web2x&context=3
+    git = {
       enable = true;
-      enableCompletion = false;  # Enabled in oh-my-zsh
-      initExtra = ''
-        test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
-        test -f ~/.config/term/ls_colors && source ~/.config/term/ls_colors
-      '';
-      shellAliases = {
-        #doas = "sudo";  # using doas by default
-        #docker = "sudo docker";
-        git-push = "git remote | xargs -L1 git push --all";  # push all branches to all remotes
-        git-push-master = "git remote | xargs -L1 -I R git push R master"; # push "master" branch to all remotes
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "systemd" "rsync" "kubectl" ];
-        theme = "terminalparty";  # Other themes: terminalparty eastwood fishy ...
-      };
-      enableSyntaxHighlighting = true;
-      enableAutosuggestions = true;
-      envExtra = ''
-        source $HOME/.config/env
-      '';
-      history = {
-        extended = true;
-        ignoreDups = true;  # true by default
-        save = 500000;  # Number of lines to save
-        size = 500000;  # Number of history lines to keep
-      };
-    };
-
-    git = {  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.git.signing
-      enable = true;
-      userName = "0xb1b1";
-      userEmail = "voxelflee@protonmail.com";
+      userName = "solarmoon";
+      userEmail = "example@example.fqdn";
       extraConfig = {
         init = {
           defaultBranch = "master";
         };
       };
       signing = {
-        key = "D2AC7A8F8CBF358416EF12ECF76D87C85967B1B1";
+        key = "KEYFINGERPRINT";
         signByDefault = true;
       };
-    };
-
-    neovim = {
-      enable = true;
-      plugins = with pkgs.vimPlugins; [ coc-rust-analyzer ];
-    };
-
-    obs-studio = {
-      enable = true;
-      plugins = [];
     };
   };
 }

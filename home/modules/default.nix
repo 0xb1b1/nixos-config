@@ -1,5 +1,7 @@
 {
   imports = [
-    ./browsers
+    ./services
+    ./terminals
+    #./browsers
   ];
 }

@@ -3,7 +3,6 @@
 let
   toolPkgs = with pkgs; [
     ### Tools ###
-    # home-manager            # Reconfigure a user environment
     alacritty               # Fast, cross-platform, OpenGL terminal emulator written in Rust
     cool-retro-term         # Cool Retro Terminal emulator
     dmenu                   # Dynamic GUI menu
@@ -124,7 +123,7 @@ let
 
   browserPkgs = with pkgs; [
     ### Browsers ###
-    #firefox                 # Web browser built from Firefox source tree
+    firefox                 # Web browser built from Firefox source tree
     #librewolf              # Fork of Firefox, focused on privacy, security and freedom
     chromium               # Open source web browser from an evil company
     tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
@@ -207,7 +206,7 @@ in {
     ./modules
   ];
 
-  # Install packages
+  # Install packages.
   home = {
     # Add "++ laptopPkgs" if running on a laptop
     packages = toolPkgs ++ devPkgs ++ lintPkgs ++ pwnPkgs ++
@@ -224,7 +223,7 @@ in {
 
   xdg.enable = true;
 
-  # Manage services
+  # Manage services.
   services = {
     syncthing = {
       enable = true;
@@ -247,41 +246,8 @@ in {
     };
   };
 
-  # Manage programs
+  # Manage programs.
   programs = {
-    gpg.enable = true;
-
-    zsh = {  # From https://www.reddit.com/r/NixOS/comments/jlcckh/comment/gap2tdk/?utm_source=share&utm_medium=web2x&context=3
-      enable = true;
-      enableCompletion = false;  # Enabled in oh-my-zsh
-      initExtra = ''
-        test -f ~/.dir_colors && eval $(dircolors ~/.dir_colors)
-        test -f ~/.config/term/ls_colors && source ~/.config/term/ls_colors
-      '';
-      shellAliases = {
-        #doas = "sudo";  # using doas by default
-        #docker = "sudo docker";
-        git-push = "git remote | xargs -L1 git push --all";  # push all branches to all remotes
-        git-push-master = "git remote | xargs -L1 -I R git push R master"; # push "master" branch to all remotes
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "systemd" "rsync" "kubectl" ];
-        theme = "terminalparty";  # Other themes: terminalparty eastwood fishy ...
-      };
-      enableSyntaxHighlighting = true;
-      enableAutosuggestions = true;
-      envExtra = ''
-        source $HOME/.config/env
-      '';
-      history = {
-        extended = true;
-        ignoreDups = true;  # true by default
-        save = 500000;  # Number of lines to save
-        size = 500000;  # Number of history lines to keep
-      };
-    };
-
     git = {  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.git.signing
       enable = true;
       userName = "0xb1b1";
@@ -295,16 +261,6 @@ in {
         key = "D2AC7A8F8CBF358416EF12ECF76D87C85967B1B1";
         signByDefault = true;
       };
-    };
-
-    neovim = {
-      enable = true;
-      plugins = with pkgs.vimPlugins; [ coc-rust-analyzer ];
-    };
-
-    obs-studio = {
-      enable = true;
-      plugins = [];
     };
   };
 }

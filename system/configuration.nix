@@ -9,11 +9,6 @@
     ./modules
   ];
 
-  # Make hardened profile more usable             # This should be enabled alongside the hardened profile
-  security.allowUserNamespaces = true;            # Must be set to true for `nix build` to function (https://nixos.org/manual/nixos/stable/index.html#sec-profile-hardened)
-  security.lockKernelModules = false;             # https://discourse.nixos.org/t/default-security-settings/9755
-  environment.memoryAllocator.provider = "libc";  # Proposed by j-k <dev@j-k.io>
-
   # Configure networking.
   networking.networkmanager = {
     enable = true;

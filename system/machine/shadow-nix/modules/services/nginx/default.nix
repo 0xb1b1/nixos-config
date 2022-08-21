@@ -2,7 +2,8 @@
   imports = [
     ./domains
   ];
-# Set up Nginx as a reverse proxy.
+
+# Set up Nginx.
   services.nginx = {
     enable = true;
     # Use recommended settings.

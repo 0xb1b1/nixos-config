@@ -215,6 +215,29 @@
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
       locations."/".proxyPass = "http://127.0.0.1:23411";
     };
+    "desktop.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      locations."/guacamole/" = {
+        proxyPass = "http://127.0.0.1:23430/guacamole/";
+        proxyWebsockets = true;
+      };
+      extraConfig = ''
+        proxy_buffering off;
+      '';
+    };
     "mmath.seizure.icu" = {
       listen = [
         {

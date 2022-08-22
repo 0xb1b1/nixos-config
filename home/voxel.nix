@@ -49,6 +49,7 @@ let
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
     openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
+    tcpdump                 # Network sniffer
   ];
 
   lintPkgs = with pkgs; [

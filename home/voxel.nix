@@ -49,7 +49,6 @@ let
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
     openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
-    tcpdump                 # Network sniffer
   ];
 
   lintPkgs = with pkgs; [
@@ -67,6 +66,7 @@ let
     mariadb                 # Enhanced, drop-in replacement for MySQL
     postgresql              # Powerful, open source object-relational database system
     sqlmap                  # Automatic SQL injection and database takeover tool
+    tcpdump                 # Network sniffer
   ];
 
   revEngineeringPkgs = with pkgs; [

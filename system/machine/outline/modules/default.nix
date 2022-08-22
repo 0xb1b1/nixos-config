@@ -1,7 +1,5 @@
 {
   imports = [
     ./boot
-    ./services
-    ./containers
   ];
 }

@@ -8,19 +8,10 @@
 
   # Import secrets
   #sops.defaultSopsFile = ./secrets.yaml;
-  #sops.age.keyFile = "/home/voxel/.config/sops/age/keys.txt";  #! TODO: Change .this path
+  #sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   #! Test secrets
   #sops.secrets.example_key = {};
-
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    # Use the systemd-boot EFI bootloader.
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    loader.efi.efiSysMountPoint = "/boot/efi";
-  };
 
   # Configure networking.
   networking = {

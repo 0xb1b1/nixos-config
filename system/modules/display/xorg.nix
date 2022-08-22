@@ -16,7 +16,7 @@
         luadbi-mysql # Database abstraction layer
       ];
     };
-    desktopManager.gnome = {
+    desktopManager.plasma5 = {
       enable = true;
     };
   };

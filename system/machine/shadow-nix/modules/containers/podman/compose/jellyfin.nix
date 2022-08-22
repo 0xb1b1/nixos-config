@@ -1,7 +1,7 @@
 {
   virtualisation.oci-containers.containers = {
     jellyfin-app = {
-      image = "docker.io/voxel/jellyfin:latest";
+      image = "docker.io/0xb1b1/jellyfin:latest";
       autoStart = true;
       user = "1000:1000";
       ports = [

@@ -6,6 +6,13 @@
     ./modules
   ];
 
+  # Import secrets
+  #sops.defaultSopsFile = ./secrets.yaml;
+  #sops.age.keyFile = "/home/voxel/.config/sops/age/keys.txt";  #! TODO: Change .this path
+
+  #! Test secrets
+  #sops.secrets.example_key = {};
+
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
 

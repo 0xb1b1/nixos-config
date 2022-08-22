@@ -7,6 +7,7 @@
     modules = [
       ../system/machine/outline
       ../system/configuration.nix
+      inputs.sops-nix.nixosModules.sops
     ];
   };
 
@@ -16,6 +17,7 @@
     modules = [
       ../system/machine/shadow-nix
       ../system/configuration.nix
+      inputs.sops-nix.nixosModules.sops
     ];
   };
 }

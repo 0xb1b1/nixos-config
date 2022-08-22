@@ -1,0 +1,9 @@
+keys:
+  - &admin_voxel age1yj98qv7vllycncs4hct98wake9z96dz90raj53uvmq8y3qvrw3xqgwfkys
+  - &shadow-nix  age197zhghw9yjs7xgakhnd7dx7p2qpv2c3c09ecnj8rs5srhpqh893snrlfzs
+creation_rules:
+  - path_regex: secrets.yaml$  # secrets/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *admin_voxel
+      - *shadow-nix

@@ -8,9 +8,11 @@
       url = github:nix-community/home-manager/release-22.05;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix.url = github:Mic92/sops-nix;
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager }:
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix }:
   let
     system = "x86_64-linux";
   in

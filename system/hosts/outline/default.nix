@@ -6,9 +6,6 @@
     ./modules
   ];
 
-  # Fix touchpad.
-  services.xserver.libinput.enable = true;
-
   # Configure networking.
   networking = {
     hostName = "outline";

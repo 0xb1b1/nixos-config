@@ -5,7 +5,7 @@
     inherit system;
     specialArgs = { inherit inputs; };
     modules = [
-      ../system/machine/outline
+      ../system/hosts/outline
       ../system/configuration.nix
       inputs.sops-nix.nixosModules.sops
     ];
@@ -15,7 +15,7 @@
     inherit system;
     specialArgs = { inherit inputs; };
     modules = [
-      ../system/machine/shadow-nix
+      ../system/hosts/shadow-nix
       ../system/configuration.nix
       inputs.sops-nix.nixosModules.sops
     ];

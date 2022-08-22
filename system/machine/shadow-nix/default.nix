@@ -26,7 +26,7 @@
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
-  # List packages installed per-machine in system profile. To search, run:
+  # List packages installed per-host in system profile. To search, run:
   # $ nix search wget
   #environment.systemPackages = with pkgs; [  ]
 

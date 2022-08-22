@@ -9,10 +9,10 @@
       environment = {
         PUID = "1000";
         PGID = "1000";
-        TZ = "Europe/Moscow";
       };
       volumes = [
         "/var/podman/compose/heimdall/config:/config"
+        "/etc/localtime:/etc/localtime:ro"
       ];
     };
   };

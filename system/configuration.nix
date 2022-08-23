@@ -67,18 +67,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-  # Install flakes.
-  nix = {
-    # Enable Flakes.
-    package = pkgs.nixFlakes;
-    # Set extra options
-    # (substituting is equal to using cache instead of building packages).
-    extraOptions = ''
-      substitute = true
-      experimental-features = nix-command flakes
-    '';
-  };
-
   # Add extra lines in /etc/hosts.
   networking.extraHosts = ''
     127.0.0.1 host0.local

@@ -7,6 +7,7 @@
     modules = [
       ../system/hosts/shadow-nix
       ../system/configuration.nix
+      ./modules/nix/compile
       inputs.sops-nix.nixosModules.sops
     ];
   };
@@ -17,6 +18,7 @@
     modules = [
       ../system/hosts/outline
       ../system/configuration.nix
+      ./modules/nix/substitute
       inputs.sops-nix.nixosModules.sops
       ./modules/laptop
     ];

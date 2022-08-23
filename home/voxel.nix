@@ -29,6 +29,7 @@ let
     tea                     # Gitea official CLI client
     file                    # Program that shows the type of files
     gnome.gnome-tweaks      # Gnome 3 DE tweaking tool
+    baobab                  # Graphical application to analyse disk usage
   ];
 
   devPkgs = with pkgs; [

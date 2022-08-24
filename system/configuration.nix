@@ -43,6 +43,7 @@
     openvpn
     ntfs3g
     proot
+    protontricks
   ];
 
   # Add udev rules.

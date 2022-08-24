@@ -1,10 +1,12 @@
 {
   imports = [
+    ./nixos
     ./users
     ./containers
     ./display
     ./security
     ./sound
+    ./games
   ];
 
   # Enable AppArmor.

@@ -12,7 +12,7 @@ Tip: to avoid breakage, `nixos-rebuild boot` is preferred for the first rebuild 
 nixos-rebuild <boot/switch> --flake .#<hostname>
 ```
 
-### How to I switch to your home-manager configuration?
+### How to switch to your home-manager configuration?
 
 It's quite easy. Just go to the root directory of the Git repo and execute this command.
 

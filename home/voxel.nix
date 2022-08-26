@@ -161,6 +161,7 @@ let
     mpv                     # General-purpose media player, fork of MPlayer and mplayer2
     ani-cli                 # Cli tool to browse and play anime
     vlc                     # Cross-platform media player and streaming server
+    sonixd                  # Full-featured Subsonic/Jellyfin compatible desktop music player
   ];
 
   recPkgs = with pkgs; [

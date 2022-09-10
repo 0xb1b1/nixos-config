@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, lib, ...}:
 
 let
   toolPkgs = with pkgs; [
@@ -46,6 +46,7 @@ let
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
     kubectl                 # Kubernetes CLI
+    vscode-fhs              # Wrapped variant of vscode which launches in a FHS compatible envrionment
     vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
@@ -207,6 +208,11 @@ in {
   # Import configuration files.
   imports = [
     ./modules
+  ];
+
+  # Allow unfree software.
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "code" "vscode"
   ];
 
   # Install packages.

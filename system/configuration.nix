@@ -44,6 +44,11 @@
     ntfs3g
     proot
     protontricks
+    wineWowPackages.stable
+    winetricks
+    flutter
+    pkg-config
+    android-studio
   ];
 
   # Add udev rules.

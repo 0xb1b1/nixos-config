@@ -33,8 +33,8 @@
   # Open ports in the firewall.
   # TODO: Is it possible to open ports in different places @ the same time?
   # [ Syncthing, Podman (PiHole), NGINX, NGINX, Dev, Dev, Podman (Gitea SSH), Podman (rustdesk),
-  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (Veloren), Podman (Veloren), Docker Swarm, Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT), services.xrdp ]
-  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 23410 21115 21116 21117 21118 21119 14004 14005 2376 2377 7946 853 3389 ];
+  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (Veloren), Podman (Veloren), Docker Swarm, Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT), services.xrdp, [TEMP] mc-server-priv0-0 ]
+  networking.firewall.allowedTCPPorts = [ 22000 53 80 443 8000 8080 23410 21115 21116 21117 21118 21119 14004 14005 2376 2377 7946 853 3389 25402 ];
   # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT) ]
   networking.firewall.allowedUDPPorts = [ 22000 21027 53 21116 7946 4789 853 ];
 

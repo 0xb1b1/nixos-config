@@ -42,6 +42,7 @@ let
     python27                # High-level dynamically-typed programming language
     python310               # High-level dynamically-typed programming language
     go                      # Go Programming language
+    dart                    # Scalable programming language, with robust libraries and runtimes
     nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects

@@ -27,29 +27,41 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    sops
-    age
-    git
-    gcc
-    neovim
-    wget
-    zsh
-    lsof
-    virt-manager
-    podman-compose
-    dnsname-cni
-    minikube
-    shadowsocks-rust
-    openvpn
-    ntfs3g
-    proot
-    protontricks
-    wineWowPackages.stable
-    winetricks
-    flutter
-    pkg-config
-    android-studio
+    sops                    # 
+    age                     # 
+    git                     # 
+    gcc                     # 
+    neovim                  # 
+    wget                    # 
+    zsh                     # 
+    lsof                    # 
+    virt-manager            # 
+    podman-compose          # 
+    dnsname-cni             # 
+    minikube                # 
+    shadowsocks-rust        # 
+    openvpn                 # 
+    ntfs3g                  # 
+    proot                   # 
+    protontricks            # 
+    wineWowPackages.stable  # 
+    winetricks              # 
+    flutter                 # 
+    pkg-config              # 
+    android-studio          # 
+    #xorg.libSM
+    #xorg.libXext  # H & ^ related to libGL.so.1 (hardware.opengl)
+    glib                    # OpenCV
+    nix-index               # A files database for nixpkgs
   ];
+
+   hardware.opengl = {  # Explicitly stated for OpenGL
+     enable = true;
+     extraPackages = with pkgs; [
+       libGL
+     ];
+     setLdLibraryPath = true;
+   };
 
   # Add udev rules.
   services.udev.packages = with pkgs; [

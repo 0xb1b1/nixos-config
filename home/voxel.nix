@@ -37,16 +37,18 @@ let
     gnumake                 # Development environment automatization
     cmake                   # Family of tools designed to build, test and package software
     rustup                  # Rust toolchain installer
+    rust-analyzer           # A modular compiler frontend for the Rust language
     maturin                 # Build and publish Rust crates Python packages
     gcc                     # GNU Compiler Collection
     python27                # High-level dynamically-typed programming language
-    python310               # High-level dynamically-typed programming language
+    python38                # High-level dynamically-typed programming language
+    #python310               # High-level dynamically-typed programming language
     go                      # Go Programming language
     nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
     kubectl                 # Kubernetes CLI
-    vscode-fhs              # Wrapped variant of vscode which launches in a FHS compatible envrionment
+    #vscode-fhs              # Wrapped variant of vscode which launches in a FHS compatible envrionment  # Permission error on this deriv
     vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server

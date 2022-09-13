@@ -49,6 +49,7 @@
     flutter                 # 
     pkg-config              # 
     android-studio          # 
+    openssl                 # Required by Rust's openssl-sys crate
     #xorg.libSM
     #xorg.libXext  # H & ^ related to libGL.so.1 (hardware.opengl)
     glib                    # OpenCV

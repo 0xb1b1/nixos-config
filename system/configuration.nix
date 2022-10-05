@@ -15,6 +15,9 @@
     #insertNameservers = [ "1.1.1.1" "1.0.0.1" ];  # Configure in host configs
   };
 
+  # Enable WireGuard all traffic passthrough (https://nixos.wiki/wiki/WireGuard)
+  networking.firewall.checkReversePath = false; # maybe "loose" also works, untested
+
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
 

@@ -1,4 +1,9 @@
 { # This module contains common fixes and special configurations for laptops
-  # Fix touchpads.
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput = {
+    # Fix touchpads.
+    enable = true;
+
+    # Disable touchpad while typing.
+    touchpad.disableWhileTyping = true;
+  };
 }

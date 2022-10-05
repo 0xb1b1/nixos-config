@@ -44,15 +44,21 @@ let
     python38                # High-level dynamically-typed programming language
     #python310               # High-level dynamically-typed programming language
     go                      # Go Programming language
+    dart                    # Scalable programming language, with robust libraries and runtimes
+    dotnet-sdk              # .NET SDK
     nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
     kubectl                 # Kubernetes CLI
-    #vscode-fhs              # Wrapped variant of vscode which launches in a FHS compatible envrionment  # Permission error on this deriv
+    #vscode-fhs              # [NONFREE] Wrapped variant of vscode which launches in a FHS compatible envrionment
     vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
     openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
+    postman                 # [NONFREE] API Development Environment
+    boost                   # Collection of C++ libraries
+    valgrind                # Debugging and profiling tool suite
+    #direnv                  # A shell extension that manages your environment
   ];
 
   lintPkgs = with pkgs; [
@@ -214,7 +220,9 @@ in {
 
   # Allow unfree software.
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "code" "vscode"
+    "code"
+    "vscode"
+    "postman"
   ];
 
   # Install packages.
@@ -225,7 +233,7 @@ in {
       syncPkgs ++ osintPkgs ++ fontPkgs ++ identPkgs ++ socialPkgs ++
       browserPkgs ++ docPkgs ++ mediaEditPkgs ++ fileSharingPkgs ++
       dlPkgs ++ mediaViewPkgs ++ recPkgs ++ cCurrPkgs ++ gamePkgs ++
-      showPkgs;
+      showPkgs ++ laptopPkgs;
     sessionVariables = {
       DISPLAY = ":0";
       EDITOR = "nvim";
@@ -259,6 +267,11 @@ in {
 
   # Manage programs.
   programs = {
+    # Enable nix-direnv for shell.nix.
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     git = {  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.git.signing
       enable = true;
       userName = "0xb1b1";

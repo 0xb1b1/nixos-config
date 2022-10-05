@@ -4,7 +4,7 @@
 
   # Configure keymap in X11.
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  layout = "us,ru";
+  xkbOptions = "grp:alt_space_toggle,compose:ralt";
   };
 }

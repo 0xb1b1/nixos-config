@@ -255,5 +255,29 @@
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
       locations."/".proxyPass = "http://127.0.0.1:23550";
     };
+    "vashina.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:1515";
+        proxyWebsockets = true;
+      };
+      extraConfig = ''
+        proxy_set_header X-Script-Name /pgadmin4;
+        proxy_redirect off;
+      '';
+    };
   };
 }

@@ -37,10 +37,12 @@ let
     gnumake                 # Development environment automatization
     cmake                   # Family of tools designed to build, test and package software
     rustup                  # Rust toolchain installer
+    rust-analyzer           # A modular compiler frontend for the Rust language
     maturin                 # Build and publish Rust crates Python packages
     gcc                     # GNU Compiler Collection
     python27                # High-level dynamically-typed programming language
-    python310               # High-level dynamically-typed programming language
+    python38                # High-level dynamically-typed programming language
+    #python310               # High-level dynamically-typed programming language
     go                      # Go Programming language
     dart                    # Scalable programming language, with robust libraries and runtimes
     dotnet-sdk              # .NET SDK

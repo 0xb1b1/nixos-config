@@ -14,4 +14,5 @@ in
 {
   voxel = mkHome "voxel" ../home/voxel.nix;
   arina = mkHome "arina" ../home/arina.nix;
+  arzym = mkHome "arzym" ../home/arzym.nix;
 }

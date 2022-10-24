@@ -130,6 +130,7 @@ let
     telegram-cli            # Command-line interface for Telegram
     kotatogram-desktop      # Kotatogram – experimental Telegram Desktop fork
     thunderbird             # Full-featured e-mail client
+    zoom-us                 # [NONFREE_LICENSE] zoom.us video conferencing application
   ];
 
   browserPkgs = with pkgs; [
@@ -223,6 +224,7 @@ in {
     "code"
     "vscode"
     "postman"
+    "zoom"
   ];
 
   # Install packages.

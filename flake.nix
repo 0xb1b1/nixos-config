@@ -10,9 +10,11 @@
     };
 
     sops-nix.url = github:Mic92/sops-nix;
+
+    vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix }:
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, vscode-server }:
   let
     system = "x86_64-linux";
   in

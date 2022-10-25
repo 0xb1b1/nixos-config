@@ -9,6 +9,7 @@
       ../system/configuration.nix
       ./modules/nix/compile
       inputs.sops-nix.nixosModules.sops
+      inputs.vscode-server.nixosModule
     ];
   };
 

@@ -44,4 +44,7 @@
     permitRootLogin = "no";
     passwordAuthentication = false;
   };
+
+  # Enable VSCode Server daemon.
+  services.vscode-server.enable = true;
 }

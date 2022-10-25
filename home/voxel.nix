@@ -42,6 +42,7 @@ let
     gcc                     # GNU Compiler Collection
     python27                # High-level dynamically-typed programming language
     python38                # High-level dynamically-typed programming language
+    python38Packages.pip    # The PyPA recommended tool for installing Python packages
     #python310               # High-level dynamically-typed programming language
     go                      # Go Programming language
     dart                    # Scalable programming language, with robust libraries and runtimes

@@ -328,7 +328,10 @@
       forceSSL = true;
       sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-      locations."/".proxyPass = "http://127.0.0.1:23437";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:23437";
+        proxyWebsockets = true;
+      };
     };
   };
 }

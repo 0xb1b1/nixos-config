@@ -82,8 +82,13 @@
   programs.mtr.enable = true;
   services.pcscd.enable = true;
 
-  # Enable Flatpak service
+  # Enable Flatpak service.
   services.flatpak.enable = true;
+
+  # Enable DBus services.
+  services.dbus.packages = with pkgs; [
+    pass-secret-service
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

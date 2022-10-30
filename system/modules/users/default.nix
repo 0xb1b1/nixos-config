@@ -18,7 +18,7 @@
       hashedPassword = "$6$cQWJCPMwSqsbh9r$xhnVcK.SONgK7P60uNPaJjoAtXXZdKbuy7YpKGzabWJuOte8LVNjNk4lTHEwvtX5SKagTgr24qwFxNkc3HRWY0";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZk4eNkp+63OWjGvEXz6xUwVU3rb7669IlLJYM54Dk0 voxel@outline"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUV9yrNWGZcxz0crQ7jIoLCAKCBiCkcrWzrxlLidky8 voxel@voyager"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVxgW64ZqL0NZm+ze5aAZWUsFG6arDYsx0S3jIDK30m voxel@voyager"
       ];
     };
     arina = {

@@ -30,6 +30,9 @@ let
     file                    # Program that shows the type of files
     gnome.gnome-tweaks      # Gnome 3 DE tweaking tool
     baobab                  # Graphical application to analyse disk usage
+    #gnome.gnome-keyring     # Collection of components in GNOME that store secrets, passwords, keys, certificates and make them available to applications
+    pinentry-gnome          # GnuPG’s interface to passphrase input
+    gnome.seahorse          # Application for managing encryption keys and passwords in the GnomeKeyring
   ];
 
   devPkgs = with pkgs; [
@@ -51,8 +54,8 @@ let
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects
     kubectl                 # Kubernetes CLI
-    #vscode-fhs              # [NONFREE] Wrapped variant of vscode which launches in a FHS compatible envrionment
-    vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
+    vscode-fhs              # [NONFREE] Wrapped variant of vscode which launches in a FHS compatible envrionment
+    #vscodium-fhs            # Wrapped variant of vscodium which launches in a FHS compatible envrionment
     emacs                   # Extensible, customizable GNU text editor
     drone-cli               # Command line client for the Drone continuous integration server
     openjdk16-bootstrap     # AdoptOpenJDK, prebuilt OpenJDK binary
@@ -189,7 +192,7 @@ let
   gamePkgs = with pkgs; [
     ### Games ###
     minetest                # Infinite-world block sandbox game
-    polymc                  # [NONFREE-DL] Free, open source launcher for Minecraft
+    #polymc                  # [NONFREE-DL] [INSECURE 1.2.2] Free, open source launcher for Minecraft
     airshipper              # Provides automatic updates for the voxel RPG Veloren
   ];
 

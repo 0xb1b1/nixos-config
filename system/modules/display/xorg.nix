@@ -21,6 +21,9 @@
     };
   };
 
+  # Enable Gnome Keyring
+  security.pam.services.gdm.enableGnomeKeyring = true;
+
   #? This setting affects Gnome 3.
   # Disable some bundled Gnome 3 packages.
   # Source: https://nixos.wiki/wiki/GNOME

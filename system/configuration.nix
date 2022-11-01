@@ -58,6 +58,7 @@
     #xorg.libXext  # H & ^ related to libGL.so.1 (hardware.opengl)
     glib                    # OpenCV
     nix-index               # A files database for nixpkgs
+    gnome.gnome-keyring     # Collection of components in GNOME that store secrets, passwords, keys, certificates and make them available to applications
   ];
 
    hardware.opengl = {  # Explicitly stated for OpenGL

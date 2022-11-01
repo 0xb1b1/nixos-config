@@ -7,7 +7,7 @@
     modules = [
       ../system/hosts/shadow-nix
       ../system/configuration.nix
-      ./modules/nix/compile
+      ./modules/nix/substitute
       inputs.sops-nix.nixosModules.sops
       inputs.vscode-server.nixosModule
     ];

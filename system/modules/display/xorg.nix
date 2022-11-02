@@ -21,8 +21,9 @@
     };
   };
 
-  # Enable Gnome Keyring
-  security.pam.services.gdm.enableGnomeKeyring = true;
+  # Enable Gnome Keyring on GDM
+  #security.pam.services.gdm.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
 
   #? This setting affects Gnome 3.
   # Disable some bundled Gnome 3 packages.

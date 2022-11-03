@@ -51,6 +51,8 @@ let
     go                      # Go Programming language
     dart                    # Scalable programming language, with robust libraries and runtimes
     dotnet-sdk              # .NET SDK
+    kotlin                  # Kotlin programming language
+    kotlin-native           # Kotlin/Native compiler
     nodejs                  # Event-driven I/O framework for the V8 JavaScript engine
     nodePackages.npm        # Package manager for JavaScript
     nodePackages.vue-cli    # Simple CLI for scaffolding Vue.js projects

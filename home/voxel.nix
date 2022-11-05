@@ -159,6 +159,7 @@ let
     darktable               # Virtual lighttable and darkroom for photographers
     libsForQt5.kdenlive     # Video editor
     handbrake               # Tool for converting video files and ripping DVDs
+    blender                 # 3D creation suite
   ];
 
   fileSharingPkgs = with pkgs; [

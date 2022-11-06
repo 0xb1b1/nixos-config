@@ -14,7 +14,6 @@
   boot.extraModulePackages = [ ];
   boot.kernelParams = [
     "nohibernate"
-    "quiet video=eDP-1:1920x1080@60"  # Fix Wayland screen resolution.
   ];
 
   # Fix touchpad

@@ -353,7 +353,7 @@
         proxyWebsockets = true;
       };
     };
-    "target.seizure.icu" = {  # Move to ?.ctf.seizure.icu and create a new wildcard crt
+    "target.seizure.icu" = {
       listen = [
         {
           addr = "0.0.0.0";
@@ -370,6 +370,26 @@
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
       locations."/" = {
         proxyPass = "http://127.0.0.1:23650";
+        proxyWebsockets = true;
+      };
+    };
+    "vidar.target.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/target.seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/target.seizure.icu/privkey.pem";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:23651";
         proxyWebsockets = true;
       };
     };

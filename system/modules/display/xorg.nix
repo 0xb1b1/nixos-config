@@ -16,7 +16,10 @@
         luadbi-mysql # Database abstraction layer
       ];
     };
-    desktopManager.plasma5 = {
+    # desktopManager.plasma5 = {
+    #   enable = true;
+    # };
+    desktopManager.gnome = {
       enable = true;
     };
   };
@@ -45,5 +48,6 @@
     #gedit             # Text editor
     #evince            # Document viewer
     #totem             # Video player
+    #seahorse          # Password manager
   ]);
 }

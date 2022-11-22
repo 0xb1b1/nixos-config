@@ -190,13 +190,14 @@ let
   cCurrPkgs = with pkgs; [
     ### Cryptocurrency ###
     trezord                 # Trezor Communication Daemon aka Trezor Bridge
-    monero-gui              # Private, secure, untraceable currency
+    monero-cli              # Monero wallet and node software
+    monero-gui              # Monero wallet and node software - GUI
   ];
 
   gamePkgs = with pkgs; [
     ### Games ###
     minetest                # Infinite-world block sandbox game
-    #polymc                  # [NONFREE-DL] [INSECURE 1.2.2] Free, open source launcher for Minecraft
+    prismlauncher           # [NONFREE-DL] Free, open source launcher for Minecraft
     airshipper              # Provides automatic updates for the voxel RPG Veloren
   ];
 

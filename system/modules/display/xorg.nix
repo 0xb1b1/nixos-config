@@ -36,7 +36,7 @@
     gnome-tour         # GNOME Greeter & Tour
   ]) ++ (with pkgs.gnome; [
     cheese            # Webcam tool
-    gnome-terminal    # Terminal emulator
+    #gnome-terminal    # Terminal emulator
     epiphany          # Web browser
     geary             # Email reader
     gnome-characters  # Character explorer

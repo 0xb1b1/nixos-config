@@ -49,21 +49,28 @@
                                           14004
                                           14005
                                           2376
-                                          2377
-                                          7946
                                           853
                                           3389
                                           25402
                                           23433
-                                          23435];
+                                          23435
+                                          51413  # [Docker] Transmission TCP
+                                          8581   # [Docker] Homebridge
+                                          5353   # [Docker] Homebridge mDNS
+                                          51827
+                                          8123   # Home Assistant
+                                          19999  # [Docker] Netdata
+                                        ];
   # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT) ]
   networking.firewall.allowedUDPPorts = [ 22000
                                           21027
                                           53
                                           21116
-                                          7946
-                                          4789
-                                          853 ];
+                                          853
+                                          51413  # [Docker] Transmission UDP
+                                          5353   # [Docker] Homebridge mDNS
+                                          51820  # [Docker] Wireguard
+                                        ];
 
   # Enable the OpenSSH daemon.
   services.openssh = {

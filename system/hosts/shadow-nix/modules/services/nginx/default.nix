@@ -5,7 +5,7 @@
 
 # Set up Nginx.
   services.nginx = {
-    enable = true;
+    enable = false;
     # Use recommended settings.
     recommendedTlsSettings = true;
     recommendedOptimisation = true;
@@ -44,6 +44,6 @@
     '';
 
     # Increase max request entity.
-    clientMaxBodySize = "20m";
+    clientMaxBodySize = "10240m";
   };
 }

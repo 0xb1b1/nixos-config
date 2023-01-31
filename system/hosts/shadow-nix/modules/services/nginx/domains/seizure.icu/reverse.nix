@@ -15,7 +15,7 @@
       forceSSL = true;
       sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-      #locations."/".proxyPass = "http://127.0.0.1:23417";
+      locations."/".proxyPass = "http://127.0.0.1:23447";
       root = "/var/http/seizure.icu";
       locations."/.well-known/" = {};
     };
@@ -76,23 +76,6 @@
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
       locations."/".proxyPass = "http://127.0.0.1:23421";
     };
-    "solarvoxel.seizure.icu" = {
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 443;
-          ssl = true;
-        }
-        {
-          addr = "0.0.0.0";
-          port = 80;
-        }
-      ];
-      forceSSL = true;
-      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
-      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-      locations."/".proxyPass = "http://127.0.0.1:23500";
-    };
     "gitea.seizure.icu" = {
       listen = [
         {
@@ -143,23 +126,6 @@
       sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
       locations."/".proxyPass = "http://127.0.0.1:23400";
-    };
-    "jitsi.seizure.icu" = {
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 443;
-          ssl = true;
-        }
-        {
-          addr = "0.0.0.0";
-          port = 80;
-        }
-      ];
-      forceSSL = true;
-      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
-      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-      locations."/".proxyPass = "http://127.0.0.1:23424";
     };
     "home.seizure.icu" = {
       listen = [
@@ -236,47 +202,6 @@
       };
       extraConfig = ''
         proxy_buffering off;
-      '';
-    };
-    "mmath.seizure.icu" = {
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 443;
-          ssl = true;
-        }
-        {
-          addr = "0.0.0.0";
-          port = 80;
-        }
-      ];
-      forceSSL = true;
-      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
-      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-      locations."/".proxyPass = "http://127.0.0.1:23550";
-    };
-    "vashina.seizure.icu" = {
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 443;
-          ssl = true;
-        }
-        {
-          addr = "0.0.0.0";
-          port = 80;
-        }
-      ];
-      forceSSL = true;
-      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
-      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:1515";
-        proxyWebsockets = true;
-      };
-      extraConfig = ''
-        proxy_set_header X-Script-Name /pgadmin4;
-        proxy_redirect off;
       '';
     };
     "datacats.seizure.icu" = {
@@ -433,7 +358,7 @@
         proxyWebsockets = true;
       };
     };
-    "vault.seizure.icu" = {
+    "warden.seizure.icu" = {
       listen = [
         {
           addr = "0.0.0.0";
@@ -450,6 +375,115 @@
       sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
       locations."/" = {
         proxyPass = "http://127.0.0.1:23406";
+        proxyWebsockets = true;
+      };
+    };
+    "vault.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:23444";
+        proxyWebsockets = true;
+      };
+    };
+    "transmission.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:23446";
+        proxyWebsockets = true;
+      };
+    };
+    "hass.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      extraConfig = ''
+        proxy_buffering off;
+      '';
+      locations."/" = {
+        proxyPass = "http://10.0.0.3:8123";
+        proxyWebsockets = true;
+      };
+    };
+    "ctf1.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      extraConfig = ''
+        proxy_buffering off;
+      '';
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:5076";
+        proxyWebsockets = true;
+      };
+    };
+    "penpot.seizure.icu" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+      ];
+      forceSSL = true;
+      sslCertificate = "/var/nginx/certs/seizure.icu/fullchain.pem";
+      sslCertificateKey = "/var/nginx/certs/seizure.icu/privkey.pem";
+      extraConfig = ''
+        proxy_buffering off;
+      '';
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:23448";
         proxyWebsockets = true;
       };
     };

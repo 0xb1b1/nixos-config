@@ -32,41 +32,35 @@
 
   # Open ports in the firewall.
   # TODO: Is it possible to open ports in different places @ the same time?
-  # [ Syncthing, Podman (PiHole), NGINX, NGINX, Dev, Dev, Podman (Gitea SSH), Podman (rustdesk),
-  # Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (rustdesk), Podman (Veloren), Podman (Veloren), Docker Swarm, Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT), services.xrdp, [TEMP] mc-server-priv0-0, meowsis_frontend ]
-  networking.firewall.allowedTCPPorts = [ 22000
-                                          53
-                                          80
-                                          443
-                                          8000
-                                          8080
-                                          23410
-                                          21115
-                                          21116
-                                          21117
-                                          21118
-                                          21119
-                                          14004
-                                          14005
-                                          2376
-                                          853
-                                          3389
-                                          25402
-                                          23433
-                                          23435
+  networking.firewall.allowedTCPPorts = [ 2222   # EndleSSH
+                                          22000  # Syncthing
+                                          #53     # Podman (PiHole)
+                                          80     # [Docker] Traefik
+                                          443    # [Docker] Traefik
+                                          8000   # Dev
+                                          8080   # Dev
+                                          23410  # [Docker] Gitea SSH
+                                          14004  # [Docker] Veloren
+                                          14005  # [Docker] Veloren
+                                          3389   # xRDP
+                                          #25402
+                                          #23433
+                                          #23435
                                           51413  # [Docker] Transmission TCP
                                           8581   # [Docker] Homebridge
                                           5353   # [Docker] Homebridge mDNS
                                           51827
                                           8123   # Home Assistant
                                           19999  # [Docker] Netdata
+                                          65443
+                                          65480
                                         ];
   # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT) ]
-  networking.firewall.allowedUDPPorts = [ 22000
+  networking.firewall.allowedUDPPorts = [ 2222   # EndleSSH
+                                          22000
                                           21027
-                                          53
-                                          21116
-                                          853
+                                          #53     # [Docker] PiHole
+                                          #853    # [Docker] PiHole DOT
                                           51413  # [Docker] Transmission UDP
                                           5353   # [Docker] Homebridge mDNS
                                           51820  # [Docker] Wireguard

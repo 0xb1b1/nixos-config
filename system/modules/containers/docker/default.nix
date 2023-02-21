@@ -6,11 +6,11 @@
     # Set default-address-pools to 172.20.0.0/16 aand 172.21.0.0/16, size 24 for both
     daemon.settings."default-address-pools" = [
       {
-        base = "172.20.0.0/16";
+        base = "172.80.0.0/16";
         size = 24;
       }
       {
-        base = "172.21.0.0/16";
+        base = "172.81.0.0/16";
         size = 24;
       }
     ];

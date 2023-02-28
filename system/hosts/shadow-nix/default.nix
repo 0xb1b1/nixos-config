@@ -54,6 +54,7 @@
                                           19999  # [Docker] Netdata
                                           65443
                                           65480
+                                          25550  # Minecraft Spigot server: 0xb1b1-server
                                         ];
   # [ Syncthing, Syncthing, Podman (PiHole), Podman (rustdesk), Docker Swarm, Docker Swarm, Podman/NGinx (PiHole DOT) ]
   networking.firewall.allowedUDPPorts = [ 2222   # EndleSSH

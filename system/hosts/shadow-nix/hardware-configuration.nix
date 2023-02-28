@@ -23,7 +23,16 @@
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/c7f8081e-f426-4469-b056-5a24191b0c9f"; }
+    [
+      {
+        device = "/dev/disk/by-uuid/c7f8081e-f426-4469-b056-5a24191b0c9f";
+        priority = 100;
+      }
+      {
+        device = "/swapfile";
+        priority = 0;
+        size = 8192;
+      }
     ];
 
   # Setup keyfile.
